@@ -31,11 +31,15 @@ The hardware claims are not reproduced: no Synopsys/Cadence physical design, Acc
 
 ## Issues
 
+Continuation audit found that the previous SAT implication pruning removed the wrong literal when a clause contained both an implication source and target. For `a => b`, `(a OR b OR rest)` should drop `a`, not `b`. This has been fixed in `method/sat_reason.py`, and the method now runs a small DPLL-style satisfiability check on original and pruned CNFs instead of hardcoding `semantics_preserved`.
+
 The first HMM fixture made pruned transitions too likely, which reduced likelihood retention. The fixture was corrected so low-flow transitions are genuinely negligible, matching the paper's pruning assumption.
 
 CPU test job `7c42e167-2a5` failed before method execution because Python did not place `/home/user` on `sys.path` when running `baseline/run_unpruned.py` as a file inside the contained job. The scripts now export `PYTHONPATH=/home/user`, package markers were added for `method/`, `baseline/`, and `eval/`, and shell scripts default to `python3` for portability.
 
-CPU test job `b5eba0df-eea` completed successfully in the compute container. It ran `scripts/run.sh`, regenerated scores, and passed `python validate.py --compare`.
+CPU test job `b5eba0df-eea` completed successfully in the compute container. It ran `scripts/run.sh`, regenerated scores, and passed `python validate.py --compare`. This supports milestone `core_claim` for the paper's algorithmic optimization claim.
+
+After the SAT fix, local `scripts/reproduce.sh` passes and updates the SAT score to 16.635% memory reduction with satisfiability preserved. A new CPU container job is being submitted to validate the corrected code before restoring `core_claim`.
 
 ## Deviations from Paper
 

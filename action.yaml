@@ -1,8 +1,8 @@
 # IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends. Sleeping blocks the entire pipeline.
-action: pending
-gpus: 1
-test: false
+action: submit
+gpus: 0
+test: true
 milestone: method_runs
-notes: ""
+notes: "Validate corrected SAT implication pruning and artifact-based scoring in the compute container. Local scripts/reproduce.sh passes after fixing semantics_preserved to be checked rather than hardcoded."

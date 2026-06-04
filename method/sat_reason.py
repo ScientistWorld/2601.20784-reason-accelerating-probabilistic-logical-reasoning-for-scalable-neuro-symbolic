@@ -59,11 +59,77 @@ def prune_hidden_literals(cnf: list[list[int]]) -> tuple[list[list[int]], int]:
         keep = list(clause)
         for a in clause:
             for b in clause:
-                if a != b and b in reach.get(a, set()) and b in keep and len(keep) > 1:
-                    keep.remove(b)
+                # If a implies b, then (a OR b OR rest) is equivalent to
+                # (b OR rest); b already covers every satisfying assignment
+                # that a can cover.
+                if a != b and b in reach.get(a, set()) and a in keep and len(keep) > 1:
+                    keep.remove(a)
                     removed += 1
+                    break
         pruned.append(keep)
     return pruned, removed
+
+
+def _simplify(cnf: list[list[int]], assignment: dict[int, bool]) -> list[list[int]] | None:
+    simplified = []
+    for clause in cnf:
+        new_clause = []
+        satisfied = False
+        for lit in clause:
+            var = abs(lit)
+            if var not in assignment:
+                new_clause.append(lit)
+                continue
+            value = assignment[var]
+            if (lit > 0 and value) or (lit < 0 and not value):
+                satisfied = True
+                break
+        if not satisfied:
+            if not new_clause:
+                return None
+            simplified.append(new_clause)
+    return simplified
+
+
+def _unit_propagate(cnf: list[list[int]], assignment: dict[int, bool]) -> tuple[list[list[int]] | None, dict[int, bool]]:
+    changed = True
+    while changed:
+        changed = False
+        for clause in cnf:
+            if len(clause) != 1:
+                continue
+            lit = clause[0]
+            var = abs(lit)
+            value = lit > 0
+            if var in assignment and assignment[var] != value:
+                return None, assignment
+            if var not in assignment:
+                assignment = dict(assignment)
+                assignment[var] = value
+                simplified = _simplify(cnf, assignment)
+                if simplified is None:
+                    return None, assignment
+                cnf = simplified
+                changed = True
+                break
+    return cnf, assignment
+
+
+def is_satisfiable(cnf: list[list[int]]) -> bool:
+    simplified, assignment = _unit_propagate(cnf, {})
+    if simplified is None:
+        return False
+    if not simplified:
+        return True
+    lit = min((lit for clause in simplified for lit in clause), key=lambda x: abs(x))
+    var = abs(lit)
+    for value in (True, False):
+        branch_assignment = dict(assignment)
+        branch_assignment[var] = value
+        branch = _simplify(simplified, branch_assignment)
+        if branch is not None and is_satisfiable(branch):
+            return True
+    return False
 
 
 def run_sat(instance: dict) -> dict:
@@ -72,6 +138,8 @@ def run_sat(instance: dict) -> dict:
     pruned_cnf, removed = prune_hidden_literals(cnf)
     after_prune = build_cnf_dag(pruned_cnf)
     after = after_prune.two_input_regularize()
+    original_sat = is_satisfiable(cnf)
+    pruned_sat = is_satisfiable(pruned_cnf)
     return {
         "kernel": "sat",
         "baseline": before.summary(),
@@ -80,5 +148,7 @@ def run_sat(instance: dict) -> dict:
         "removed_literals": removed,
         "clauses_before": len(cnf),
         "clauses_after": len(pruned_cnf),
-        "semantics_preserved": 1.0,
+        "semantics_preserved": 1.0 if original_sat == pruned_sat else 0.0,
+        "original_satisfiable": 1.0 if original_sat else 0.0,
+        "pruned_satisfiable": 1.0 if pruned_sat else 0.0,
     }
