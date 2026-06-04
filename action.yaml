@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
-test: true
+test: false
 milestone: core_claim
-notes: "Retry CPU test after fixing contained-job Python import path; runs scripts/reproduce.sh and validate.py --compare."
+notes: "Core REASON algorithmic reproduction is implemented, scored, documented, committed, and verified by CPU compute job b5eba0df-eea."

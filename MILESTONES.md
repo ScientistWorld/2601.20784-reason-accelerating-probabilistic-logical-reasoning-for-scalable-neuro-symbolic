@@ -4,7 +4,7 @@
 
 ## Progress Log
 
-### [2026-06-04 23:58] - none
+### [2026-06-04 23:40] - none
 - Read the paper and identified REASON's reproducible algorithmic core: unified DAG construction, adaptive pruning, and two-input regularization.
 
 ### [2026-06-04 23:43] - method_runs
@@ -19,5 +19,9 @@
 - Fixed contained-job import failure from CPU job `7c42e167-2a5` by making scripts export `PYTHONPATH=/home/user` and adding package markers.
 - Verified `scripts/run.sh` with a stripped local environment.
 
+### [2026-06-04 23:59] - core_claim
+- CPU compute job `b5eba0df-eea` completed successfully.
+- The container run executed `scripts/run.sh` and passed `python validate.py --compare`.
+
 ## Stop Justification
-- Not stopped. A CPU compute job is being submitted to validate the packaged pipeline.
+- Finished at `core_claim`. The reproducible algorithmic core is packaged and verified; full hardware synthesis/simulation claims are outside the available environment.
