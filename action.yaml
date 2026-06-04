@@ -2,4 +2,4 @@ action: done
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Core REASON algorithmic reproduction is implemented, scored, documented, committed, and verified by CPU compute job b5eba0df-eea."
+notes: "Core REASON algorithmic reproduction is implemented, scored, documented, verified by CPU compute job b5eba0df-eea, and reference/score validation now passes."

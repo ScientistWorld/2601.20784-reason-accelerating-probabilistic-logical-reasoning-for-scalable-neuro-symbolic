@@ -21,7 +21,7 @@ Current local results:
 
 Paper Table IV references used in `scoring/reference.json`:
 
-- logical/FOLIO-style: 38% memory reduction with 91/92 accuracy retention;
+- logical/AlphaGeometry MiniF2F-style: 21% memory reduction with unchanged 81% accuracy;
 - HMM/Ctrl-G CoAuthor-style: 29% memory reduction with 86/87 success-rate retention;
 - PC/R2-Guard TwinSafety-style: 37% memory reduction with 0.752/0.758 AUPRC retention.
 

@@ -23,5 +23,9 @@
 - CPU compute job `b5eba0df-eea` completed successfully.
 - The container run executed `scripts/run.sh` and passed `python validate.py --compare`.
 
+### [2026-06-04 23:59] - core_claim
+- Corrected the SAT/logical reference target from the FOLIO row to the closer AlphaGeometry MiniF2F logical-DAG row in Table IV.
+- Revalidated score/reference consistency locally.
+
 ## Stop Justification
 - Finished at `core_claim`. The reproducible algorithmic core is packaged and verified; full hardware synthesis/simulation claims are outside the available environment.

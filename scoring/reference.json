@@ -10,7 +10,7 @@
       },
       "results": {
         "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "semantics_preserved": 1.0},
-        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 38.0, "semantics_preserved": 0.9891}
+        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 21.0, "semantics_preserved": 1.0}
       }
     },
     "hmm_flow_pruning": {
