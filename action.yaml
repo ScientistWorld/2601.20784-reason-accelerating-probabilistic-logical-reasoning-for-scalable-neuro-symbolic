@@ -1,5 +1,8 @@
-action: done
-gpus: 0
+# IMPORTANT: Once you set action to 'submit' or 'done', STOP immediately.
+# Do NOT sleep, poll, or wait for jobs. The system reads this file
+# only after your turn ends. Sleeping blocks the entire pipeline.
+action: pending
+gpus: 1
 test: false
-milestone: core_claim
-notes: "Core REASON algorithmic reproduction is implemented, scored, documented, verified by CPU compute job b5eba0df-eea, and reference/score validation now passes."
+milestone: method_runs
+notes: ""
