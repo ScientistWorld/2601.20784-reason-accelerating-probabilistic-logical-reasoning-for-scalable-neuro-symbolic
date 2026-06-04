@@ -28,4 +28,4 @@
 - Revalidated score/reference consistency locally.
 
 ## Stop Justification
-- Finished at `core_claim`. The reproducible algorithmic core is packaged and verified; full hardware synthesis/simulation claims are outside the available environment.
+- Completed at milestone `core_claim`.
