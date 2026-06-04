@@ -17,7 +17,9 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON:-python3}"
 
 bash scripts/baseline.sh
 bash scripts/method.sh
-python validate.py --compare
+"$PYTHON_BIN" validate.py --compare

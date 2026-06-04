@@ -2,4 +2,4 @@ action: submit
 gpus: 0
 test: true
 milestone: core_claim
-notes: "CPU test job to verify the packaged REASON DAG pruning reproduction runs scripts/reproduce.sh and passes validate.py --compare inside the compute container."
+notes: "Retry CPU test after fixing contained-job Python import path; runs scripts/reproduce.sh and validate.py --compare."

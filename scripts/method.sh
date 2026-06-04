@@ -9,9 +9,11 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON:-python3}"
 
-python data/generate_benchmarks.py --out data/reason_benchmarks.json
-python -m method.run_reason --data data/reason_benchmarks.json --out checkpoints/reason_outputs.json
+"$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json
+"$PYTHON_BIN" -m method.run_reason --data data/reason_benchmarks.json --out checkpoints/reason_outputs.json
 
 if [ ! -f checkpoints/baseline_outputs.json ]; then
   bash scripts/baseline.sh

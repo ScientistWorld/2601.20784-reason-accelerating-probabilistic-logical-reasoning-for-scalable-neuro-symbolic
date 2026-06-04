@@ -16,6 +16,8 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON:-python3}"
 
-python data/generate_benchmarks.py --out data/reason_benchmarks.json
-python baseline/run_unpruned.py --data data/reason_benchmarks.json --out checkpoints/baseline_outputs.json
+"$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json
+"$PYTHON_BIN" baseline/run_unpruned.py --data data/reason_benchmarks.json --out checkpoints/baseline_outputs.json

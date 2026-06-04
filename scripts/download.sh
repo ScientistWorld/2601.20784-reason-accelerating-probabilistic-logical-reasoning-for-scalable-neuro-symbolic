@@ -18,7 +18,9 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON:-python3}"
 
 # No external downloads are required. The benchmark fixtures are generated
 # deterministically by data/generate_benchmarks.py.
-python data/generate_benchmarks.py --out data/reason_benchmarks.json
+"$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json

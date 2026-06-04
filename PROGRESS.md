@@ -33,6 +33,8 @@ The hardware claims are not reproduced: no Synopsys/Cadence physical design, Acc
 
 The first HMM fixture made pruned transitions too likely, which reduced likelihood retention. The fixture was corrected so low-flow transitions are genuinely negligible, matching the paper's pruning assumption.
 
+CPU test job `7c42e167-2a5` failed before method execution because Python did not place `/home/user` on `sys.path` when running `baseline/run_unpruned.py` as a file inside the contained job. The scripts now export `PYTHONPATH=/home/user`, package markers were added for `method/`, `baseline/`, and `eval/`, and shell scripts default to `python3` for portability.
+
 ## Deviations from Paper
 
 The paper evaluates full neuro-symbolic systems and custom hardware across ten datasets. This reproduction uses deterministic procedural kernel benchmarks because the complete workload stack, hardware design files, commercial EDA flow, and cycle-accurate simulator configuration are not available. The algorithm itself is not replaced: the implemented computation follows the paper's unified DAG, adaptive pruning, and two-input regularization steps.

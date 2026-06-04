@@ -23,13 +23,15 @@
 set -e
 
 cd /home/user
+export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+PYTHON_BIN="${PYTHON:-python3}"
 
 mkdir -p scoring
 
 METHOD_ARTIFACT="${1:-checkpoints/reason_outputs.json}"
 BASELINE_ARTIFACT="${2:-checkpoints/baseline_outputs.json}"
 
-python eval/score_reason.py \
+"$PYTHON_BIN" eval/score_reason.py \
   --method-artifact "$METHOD_ARTIFACT" \
   --baseline-artifact "$BASELINE_ARTIFACT" \
   --out scoring/scores.json
