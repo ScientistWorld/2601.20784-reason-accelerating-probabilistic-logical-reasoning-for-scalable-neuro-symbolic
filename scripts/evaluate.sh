@@ -26,5 +26,10 @@ cd /home/user
 
 mkdir -p scoring
 
-# TODO: implement evaluation using code in eval/
-# Must write scoring/scores.json at the end
+METHOD_ARTIFACT="${1:-checkpoints/reason_outputs.json}"
+BASELINE_ARTIFACT="${2:-checkpoints/baseline_outputs.json}"
+
+python eval/score_reason.py \
+  --method-artifact "$METHOD_ARTIFACT" \
+  --baseline-artifact "$BASELINE_ARTIFACT" \
+  --out scoring/scores.json

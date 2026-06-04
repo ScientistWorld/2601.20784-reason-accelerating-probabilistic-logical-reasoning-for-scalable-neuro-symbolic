@@ -10,5 +10,11 @@ set -e
 
 cd /home/user
 
-# TODO: run the paper's method
-# TODO: call scripts/evaluate.sh to score
+python data/generate_benchmarks.py --out data/reason_benchmarks.json
+python -m method.run_reason --data data/reason_benchmarks.json --out checkpoints/reason_outputs.json
+
+if [ ! -f checkpoints/baseline_outputs.json ]; then
+  bash scripts/baseline.sh
+fi
+
+bash scripts/evaluate.sh checkpoints/reason_outputs.json checkpoints/baseline_outputs.json

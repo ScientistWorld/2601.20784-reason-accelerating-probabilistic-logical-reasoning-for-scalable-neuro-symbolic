@@ -1,15 +1,17 @@
 # Evaluation
 
-How success is measured. Describe only the metrics, targets, and evaluation procedure — do NOT describe the paper's method or how they achieved these results. Think of this as a general evaluation protocal for other scientists trying to solve the same problem, where they should not see this paper's solution.
-
 ## Metrics
 
-<!-- What metrics are used? How are they computed? What does higher/lower mean? -->
+`memory_reduction_pct` measures the percentage reduction in graph memory units, where a memory unit is one stored node or one stored edge in the compiled reasoning DAG. Higher is better.
+
+`semantics_preserved` is used for logical workloads and is 1 when the transformed formula preserves satisfiability semantics. Higher is better.
+
+`avg_loglik_retention_pct` is used for probabilistic workloads and is `100 * exp(avg_loglik_after - avg_loglik_before)` over the fixed evaluation sequences or samples. Higher is better, with 100 meaning no likelihood loss.
 
 ## Baselines and Targets
 
-<!-- What performance levels exist as reference points? Include the paper's reported numbers as targets, and any standard baselines. A scientist agent should know what "good" looks like. -->
+The baseline is the unpruned DAG representation of each workload. The target is a transformed graph that reduces memory while retaining logical or probabilistic behavior. Paper-reported algorithm optimization targets from Table IV are used as references: 38% memory reduction with 91/92 accuracy retention for FOLIO-style logical reasoning, 29% memory reduction with 86/87 success-rate retention for Ctrl-G/CoAuthor-style HMM reasoning, and 37% memory reduction with 0.752/0.758 AUPRC retention for R2-Guard/TwinSafety-style probabilistic reasoning.
 
 ## Evaluation Protocol
 
-<!-- How should evaluation be run? What data split, what conditions? Any important details about how to compare fairly (e.g., fixed seeds, specific test sets, averaging over runs). -->
+Run `scripts/reproduce.sh` or run `scripts/baseline.sh`, `scripts/method.sh`, and `scripts/evaluate.sh` in sequence. The method must write `checkpoints/reason_outputs.json`; evaluation reads that artifact plus `checkpoints/baseline_outputs.json` and writes `scoring/scores.json`. Evaluation code must not import the candidate method.

@@ -17,4 +17,5 @@ set -e
 
 cd /home/user
 
-# TODO: run baseline
+python data/generate_benchmarks.py --out data/reason_benchmarks.json
+python baseline/run_unpruned.py --data data/reason_benchmarks.json --out checkpoints/baseline_outputs.json

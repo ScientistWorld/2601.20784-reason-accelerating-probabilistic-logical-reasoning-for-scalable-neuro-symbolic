@@ -1,21 +1,19 @@
 # Reproduction Milestones
 
-**Current: none**
-
-<!-- Milestone levels (update "Current" above as you progress):
-  none             — just started, no meaningful progress yet
-  method_runs      — the paper's method executes end-to-end without errors
-  core_claim       — minimum experiment supports the paper's central claim
-  core_claim_plus  — core claim reproduced on additional settings
-  secondary_claims — secondary results or contributions reproduced
-  majority         — more than half of reported results reproduced
-  near_complete    — most results reproduced, only minor gaps remain
-  full             — all reported results reproduced
--->
+**Current: core_claim**
 
 ## Progress Log
 
-<!-- Write your progress here -->
+### [2026-06-04 23:58] - none
+- Read the paper and identified REASON's reproducible algorithmic core: unified DAG construction, adaptive pruning, and two-input regularization.
+
+### [2026-06-04 23:43] - method_runs
+- Implemented SAT/FOL implication pruning, HMM posterior-flow pruning, probabilistic-circuit flow pruning, and DAG regularization.
+- Added baseline and method scripts that execute end to end and write reusable artifacts.
+
+### [2026-06-04 23:47] - core_claim
+- Local `scripts/reproduce.sh` run passed validation.
+- Reproduced the core algorithmic claim on deterministic logical, HMM, and probabilistic-circuit benchmarks: smaller DAGs with preserved semantics or likelihood.
 
 ## Stop Justification
-- Completed at milestone `none`.
+- Not stopped. A CPU compute job is being submitted to validate the packaged pipeline.

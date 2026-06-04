@@ -1,0 +1,43 @@
+{
+  "experiments": {
+    "sat_implication_pruning": {
+      "description": "Logical reasoning DAG pruning: preserve CNF semantics while reducing redundant literal/edge structure.",
+      "weight": 0.25,
+      "primary_metric": "memory_reduction_pct",
+      "metrics": {
+        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "semantics_preserved": {"higher_is_better": true, "coefficient": 1.0}
+      },
+      "results": {
+        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "semantics_preserved": 1.0},
+        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 38.0, "semantics_preserved": 0.9891}
+      }
+    },
+    "hmm_flow_pruning": {
+      "description": "Sequential probabilistic reasoning DAG pruning: preserve likelihood while reducing low-posterior transition structure.",
+      "weight": 0.35,
+      "primary_metric": "memory_reduction_pct",
+      "metrics": {
+        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0}
+      },
+      "results": {
+        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
+        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 29.0, "avg_loglik_retention_pct": 98.8506}
+      }
+    },
+    "pc_flow_pruning": {
+      "description": "Probabilistic circuit DAG pruning: preserve likelihood while reducing low-flow mixture branches.",
+      "weight": 0.40,
+      "primary_metric": "memory_reduction_pct",
+      "metrics": {
+        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0}
+      },
+      "results": {
+        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
+        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 37.0, "avg_loglik_retention_pct": 99.2084}
+      }
+    }
+  }
+}

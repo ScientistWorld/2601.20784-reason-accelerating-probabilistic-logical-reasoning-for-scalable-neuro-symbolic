@@ -1,17 +1,13 @@
 # Problem Definition
 
-What problem does this paper address? Write this so that someone with no knowledge of the paper can understand what needs to be solved and how success is measured.
-
-Do NOT describe the paper's method or solution here — only the problem itself. Think about if a future scientist agent try to solve this problem from scratch without knowing what approach the paper took. If you leak the solution, you compromise the benchmark.
-
 ## Research Question
 
-<!-- What problem or challenge does this paper tackle? What gap in existing work does it address? -->
+Can symbolic and probabilistic reasoning kernels in neuro-symbolic systems be transformed into compact executable graph representations while preserving the reasoning result?
 
 ## Why It Matters
 
-<!-- Why is this problem important? What would a good solution enable? Make it short -->
+Neuro-symbolic systems often spend a large fraction of runtime in non-neural logical or probabilistic inference. A successful solution should reduce the size and irregularity of those reasoning workloads without changing the answer quality, making them more practical to execute on constrained hardware.
 
 ## Success Criteria
 
-<!-- What would a successful solution look like? What properties should it have? This is about the goal, not the paper's specific approach. Make it short -->
+A solution should accept representative logical, sequential probabilistic, and probabilistic-circuit workloads; produce smaller reasoning graphs or equivalent machine-independent work counts; and preserve logical satisfiability or probabilistic likelihood closely enough that downstream task behavior is maintained.
