@@ -41,6 +41,8 @@ CPU test job `b5eba0df-eea` completed successfully in the compute container. It 
 
 After the SAT fix, local `scripts/reproduce.sh` passes and updates the SAT score to 16.635% memory reduction with satisfiability preserved. A new CPU container job is being submitted to validate the corrected code before restoring `core_claim`.
 
+CPU container job `d119c227-475` completed successfully after the SAT fix. It ran `scripts/run.sh`, regenerated the same corrected scores, and passed `python validate.py --compare`; milestone `core_claim` is restored.
+
 ## Deviations from Paper
 
 The paper evaluates full neuro-symbolic systems and custom hardware across ten datasets. This reproduction uses deterministic procedural kernel benchmarks because the complete workload stack, hardware design files, commercial EDA flow, and cycle-accurate simulator configuration are not available. The algorithm itself is not replaced: the implemented computation follows the paper's unified DAG, adaptive pruning, and two-input regularization steps.

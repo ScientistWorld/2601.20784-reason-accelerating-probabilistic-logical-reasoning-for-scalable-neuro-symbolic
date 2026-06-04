@@ -1,6 +1,6 @@
 # Reproduction Milestones
 
-**Current: method_runs**
+**Current: core_claim**
 
 ## Progress Log
 
@@ -20,3 +20,7 @@
 - Continuation audit reset the active milestone to `method_runs`.
 - Found and fixed an SAT pruning bug: implication-redundant clauses now remove the implied-covering source literal correctly, and SAT satisfiability preservation is checked instead of hardcoded.
 - Local `scripts/reproduce.sh` passes with updated scores: 16.635% SAT memory reduction with satisfiability preserved, 27.470% HMM memory reduction with 100% likelihood retention, and 24.793% PC memory reduction with 100% likelihood retention.
+
+### [2026-06-05 00:17] - core_claim
+- CPU container job `d119c227-475` completed successfully after the SAT pruning fix.
+- The corrected end-to-end reproduction passed `python validate.py --compare` in the compute container with SAT, HMM, and PC scores present in `scoring/scores.json`.
