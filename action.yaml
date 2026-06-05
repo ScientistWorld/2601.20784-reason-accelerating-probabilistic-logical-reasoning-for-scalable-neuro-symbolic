@@ -1,5 +1,5 @@
-action: submit
+action: done
 gpus: 0
-test: true
+test: false
 milestone: core_claim
-notes: "CPU test job to validate the expanded scoring metrics and full reproduce/train/test validation path in the compute container."
+notes: "Final verification passed after fixing evaluator method-name handling and documentation; workspace is ready at core_claim."

@@ -20,5 +20,9 @@
 - Expanded `scripts/evaluate.sh` scoring output to include all benefit and constraint metrics defined in `scoring/reference.json`.
 - Local full reproduction and train/test evaluator passes validate; a CPU container job is being submitted to verify the patched scoring path.
 
+### [2026-06-05 00:45] - core_claim
+- Final verification confirmed method/eval separation, method-agnostic scoring docs, reusable artifact-based evaluation, and train/test evaluator consistency.
+- Fixed evaluator method-name handling and refreshed documentation; `python3 validate.py --compare` passes.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

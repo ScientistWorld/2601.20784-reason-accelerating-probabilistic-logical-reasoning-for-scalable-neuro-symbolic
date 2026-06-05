@@ -8,6 +8,18 @@ import json
 from pathlib import Path
 
 
+def canonical_method_name(path: Path, payload: dict) -> str:
+    declared_name = payload.get("method")
+    raw_name = str(declared_name or path.stem)
+    normalized = raw_name.strip()
+    lower = normalized.lower()
+    if lower in {"unpruned_baseline", "baseline", "unpruned"}:
+        return "unpruned_dag"
+    if declared_name is None and "baseline" in path.stem.lower():
+        return "unpruned_dag"
+    return normalized
+
+
 def result_metrics(result: dict) -> dict[str, float]:
     baseline = result["baseline"]
     pruned = result.get("pruned", result.get("reason"))
@@ -39,14 +51,18 @@ def main() -> None:
     parser.add_argument("--out", default="scoring/scores.json")
     args = parser.parse_args()
 
-    method_payload = json.loads(Path(args.method_artifact).read_text(encoding="utf-8"))
-    baseline_payload = json.loads(Path(args.baseline_artifact).read_text(encoding="utf-8"))
+    method_path = Path(args.method_artifact)
+    baseline_path = Path(args.baseline_artifact)
+    method_payload = json.loads(method_path.read_text(encoding="utf-8"))
+    baseline_payload = json.loads(baseline_path.read_text(encoding="utf-8"))
+    method_name = canonical_method_name(method_path, method_payload)
+    baseline_name = canonical_method_name(baseline_path, baseline_payload)
     scores = {"experiments": {}}
     for exp_name, method_result in method_payload["results"].items():
         scores["experiments"][exp_name] = {
             "results": {
-                "unpruned_dag": result_metrics(baseline_payload["results"][exp_name]),
-                "reason_algorithm": result_metrics(method_result),
+                baseline_name: result_metrics(baseline_payload["results"][exp_name]),
+                method_name: result_metrics(method_result),
             }
         }
     Path(args.out).parent.mkdir(parents=True, exist_ok=True)

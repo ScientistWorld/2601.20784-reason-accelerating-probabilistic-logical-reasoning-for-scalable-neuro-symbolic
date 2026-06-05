@@ -1,7 +1,7 @@
 {
   "experiments": {
     "sat_implication_pruning": {
-      "description": "Logical reasoning DAG pruning: preserve CNF semantics while reducing redundant literal/edge structure.",
+      "description": "Logical reasoning graph compression: preserve CNF semantics while reducing redundant literal/edge structure.",
       "weight": 0.25,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
@@ -18,7 +18,7 @@
         "semantics_preserved": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Correctness constraint: the pruned logical workload must preserve the original satisfiability semantics."
+          "description": "Correctness constraint: the transformed logical workload must preserve the original satisfiability semantics."
         },
         "edge_reduction_pct": {
           "higher_is_better": true,
@@ -42,7 +42,7 @@
       }
     },
     "hmm_flow_pruning": {
-      "description": "Sequential probabilistic reasoning DAG pruning: preserve likelihood while reducing low-posterior transition structure.",
+      "description": "Sequential probabilistic reasoning graph compression: preserve likelihood while reducing transition structure.",
       "weight": 0.35,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
@@ -59,7 +59,7 @@
         "avg_loglik_retention_pct": {
           "higher_is_better": true,
           "coefficient": 0.0,
-          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when pruning improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
+          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when transformation improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
         },
         "edge_reduction_pct": {
           "higher_is_better": true,
@@ -79,7 +79,7 @@
         "avg_abs_loglik_delta": {
           "higher_is_better": false,
           "coefficient": -0.2,
-          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after pruning."
+          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after transformation."
         }
       },
       "results": {
@@ -88,7 +88,7 @@
       }
     },
     "pc_flow_pruning": {
-      "description": "Probabilistic circuit DAG pruning: preserve likelihood while reducing low-flow mixture branches.",
+      "description": "Probabilistic circuit graph compression: preserve likelihood while reducing mixture/circuit structure.",
       "weight": 0.40,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
@@ -105,7 +105,7 @@
         "avg_loglik_retention_pct": {
           "higher_is_better": true,
           "coefficient": 0.0,
-          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when pruning improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
+          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when transformation improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
         },
         "edge_reduction_pct": {
           "higher_is_better": true,
@@ -125,7 +125,7 @@
         "avg_abs_loglik_delta": {
           "higher_is_better": false,
           "coefficient": -0.2,
-          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after pruning."
+          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after transformation."
         }
       },
       "results": {
