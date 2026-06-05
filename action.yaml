@@ -1,5 +1,5 @@
-action: done
+action: submit
 gpus: 0
-test: false
+test: true
 milestone: core_claim
-notes: "Final verification passed after fixing evaluator method-name handling and documentation; workspace is ready at core_claim."
+notes: "CPU test job to validate strengthened REASON scoring, final regularized compression metrics, and SAT implication-proof artifacts in the compute container."
