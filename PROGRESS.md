@@ -45,6 +45,8 @@ After the SAT fix, local `scripts/reproduce.sh` passes and updates the SAT score
 
 CPU container job `d119c227-475` completed successfully after the SAT fix. It ran `scripts/run.sh`, regenerated the same corrected scores, and passed `python validate.py --compare`; milestone `core_claim` is restored.
 
+On 2026-06-05, the main evaluator was tightened to report every visible benefit and constraint metric defined in `scoring/reference.json`: memory reduction, compression balance, edge reduction, fan-in regularization, regularization memory overhead, satisfiability preservation, and probabilistic log-likelihood deltas. A local sequential run of `scripts/reproduce.sh`, `scripts/evaluate_train.sh`, `scripts/evaluate_test.sh`, and `python3 validate.py --compare` passes with these expanded scores. A CPU test job is being submitted to validate the updated scoring path in the compute container.
+
 ## Deviations from Paper
 
 The paper evaluates full neuro-symbolic systems and custom hardware across ten datasets. This reproduction uses deterministic procedural kernel benchmarks because the complete workload stack, hardware design files, commercial EDA flow, and cycle-accurate simulator configuration are not available. The algorithm itself is not replaced: the implemented computation follows the paper's unified DAG, adaptive pruning, and two-input regularization steps.

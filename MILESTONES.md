@@ -16,5 +16,9 @@
 - Continuation audit restored `core_claim` after re-reading `method/`, `eval/`, scripts, scoring, and briefing deliverables.
 - Re-ran standalone `scripts/evaluate.sh` and full `scripts/reproduce.sh`; both regenerated scores and passed `python3 validate.py --compare`.
 
+### [2026-06-05 00:30] - core_claim
+- Expanded `scripts/evaluate.sh` scoring output to include all benefit and constraint metrics defined in `scoring/reference.json`.
+- Local full reproduction and train/test evaluator passes validate; a CPU container job is being submitted to verify the patched scoring path.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

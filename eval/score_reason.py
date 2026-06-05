@@ -9,11 +9,24 @@ from pathlib import Path
 
 
 def result_metrics(result: dict) -> dict[str, float]:
+    baseline = result["baseline"]
+    pruned = result.get("pruned", result.get("reason"))
+    reason = result["reason"]
+    memory_reduction = 100.0 * (float(baseline["memory_units"]) - float(pruned["memory_units"])) / float(baseline["memory_units"])
+    edge_reduction = 100.0 * (float(baseline["edges"]) - float(pruned["edges"])) / float(baseline["edges"])
     metrics = {
-        "memory_reduction_pct": float(result["memory_reduction_pct"]),
+        "memory_reduction_pct": memory_reduction,
+        "compression_balance_pct": min(memory_reduction, edge_reduction),
+        "edge_reduction_pct": edge_reduction,
+        "fanin_regularized": 1.0 if float(reason["max_fanin"]) <= 2.0 else 0.0,
+        "regularized_memory_overhead_pct": 100.0
+        * (float(reason["memory_units"]) - float(pruned["memory_units"]))
+        / float(pruned["memory_units"]),
     }
     if "avg_loglik_retention_pct" in result:
         metrics["avg_loglik_retention_pct"] = float(result["avg_loglik_retention_pct"])
+    if "avg_loglik_before" in result and "avg_loglik_after" in result:
+        metrics["avg_abs_loglik_delta"] = abs(float(result["avg_loglik_after"]) - float(result["avg_loglik_before"]))
     if "semantics_preserved" in result:
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
     return metrics

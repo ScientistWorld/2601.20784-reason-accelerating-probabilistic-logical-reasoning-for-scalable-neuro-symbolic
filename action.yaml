@@ -1,6 +1,5 @@
-# Split evaluation complete.
-action: done
+action: submit
 gpus: 0
-test: false
+test: true
 milestone: core_claim
-notes: "Packager audit passed: no remote artifacts required, download.sh regenerates deterministic data, paths align, and validation reports no shared references."
+notes: "CPU test job to validate the expanded scoring metrics and full reproduce/train/test validation path in the compute container."
