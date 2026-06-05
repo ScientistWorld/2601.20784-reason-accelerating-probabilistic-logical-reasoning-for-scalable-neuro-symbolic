@@ -1,0 +1,47 @@
+{
+  "slice": "train",
+  "experiments": {
+    "hmm_flow_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "memory_reduction_pct": 27.47043631915183,
+          "compression_balance_pct": 27.47043631915183,
+          "avg_loglik_retention_pct": 100.0
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "avg_loglik_retention_pct": 100.0
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "memory_reduction_pct": 24.793388429752067,
+          "compression_balance_pct": 24.793388429752067,
+          "avg_loglik_retention_pct": 100.0
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "avg_loglik_retention_pct": 100.0
+        }
+      }
+    },
+    "sat_implication_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "memory_reduction_pct": 16.6351606805293,
+          "compression_balance_pct": 16.6351606805293,
+          "semantics_preserved": 1.0
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "semantics_preserved": 1.0
+        }
+      }
+    }
+  }
+}
