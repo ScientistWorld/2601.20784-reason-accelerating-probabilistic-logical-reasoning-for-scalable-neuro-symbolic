@@ -83,6 +83,7 @@ def run_hmm(instance: dict, prune_fraction: float = 0.30) -> dict:
     return {
         "kernel": "hmm",
         "baseline": before.summary(),
+        "baseline_regularized": before.two_input_regularize().summary(),
         "pruned": after_prune.summary(),
         "reason": after.summary(),
         "transition_edges_before": states * states,

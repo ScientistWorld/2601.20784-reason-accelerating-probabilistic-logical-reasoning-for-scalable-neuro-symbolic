@@ -75,15 +75,23 @@ def edge_reduction_pct(result: dict[str, Any]) -> float:
     return 100.0 * (float(baseline["edges"]) - float(pruned["edges"])) / float(baseline["edges"])
 
 
+def final_regularized_edge_reduction_pct(result: dict[str, Any]) -> float:
+    baseline_regularized = result.get("baseline_regularized", result["baseline"])
+    reason = result["reason"]
+    return 100.0 * (
+        float(baseline_regularized["edges"]) - float(reason["edges"])
+    ) / float(baseline_regularized["edges"])
+
+
 def fanin_regularized(result: dict[str, Any]) -> float:
     reason = result["reason"]
     return 1.0 if float(reason["max_fanin"]) <= 2.0 else 0.0
 
 
 def regularized_memory_overhead_pct(result: dict[str, Any]) -> float:
-    baseline = result["baseline"]
+    pruned = reduced_summary(result)
     reason = result["reason"]
-    return 100.0 * (float(reason["memory_units"]) - float(baseline["memory_units"])) / float(baseline["memory_units"])
+    return 100.0 * (float(reason["memory_units"]) - float(pruned["memory_units"])) / float(pruned["memory_units"])
 
 
 def avg_abs_loglik_delta(result: dict[str, Any]) -> float:
@@ -93,11 +101,13 @@ def avg_abs_loglik_delta(result: dict[str, Any]) -> float:
 def test_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
     metrics = {
         "edge_reduction_pct": edge_reduction_pct(result),
+        "final_regularized_edge_reduction_pct": final_regularized_edge_reduction_pct(result),
         "fanin_regularized": fanin_regularized(result),
         "regularized_memory_overhead_pct": regularized_memory_overhead_pct(result),
     }
     if exp_name == "sat_implication_pruning":
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
+        metrics["implication_proof_sound"] = float(result.get("implication_proof_sound", result["semantics_preserved"]))
     else:
         metrics["avg_loglik_retention_pct"] = float(result["avg_loglik_retention_pct"])
         metrics["avg_abs_loglik_delta"] = avg_abs_loglik_delta(result)

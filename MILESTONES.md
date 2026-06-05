@@ -24,5 +24,9 @@
 - Final verification confirmed method/eval separation, method-agnostic scoring docs, reusable artifact-based evaluation, and train/test evaluator consistency.
 - Fixed evaluator method-name handling and refreshed documentation; `python3 validate.py --compare` passes.
 
+### [2026-06-05 01:15] - core_claim
+- Strengthened scoring after a sub-agent audit: final regularized DAG compression is now measured against an unpruned baseline after the same two-input regularization step.
+- SAT pruning artifacts now include an implication-reachability proof check for removed literals, in addition to satisfiability preservation.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

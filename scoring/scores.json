@@ -6,17 +6,23 @@
           "memory_reduction_pct": 0.0,
           "compression_balance_pct": 0.0,
           "edge_reduction_pct": 0.0,
-          "fanin_regularized": 0.0,
-          "regularized_memory_overhead_pct": 0.0,
-          "semantics_preserved": 1.0
+          "final_regularized_memory_reduction_pct": 0.0,
+          "final_regularized_edge_reduction_pct": 0.0,
+          "fanin_regularized": 1.0,
+          "regularized_memory_overhead_pct": 68.05293005671078,
+          "semantics_preserved": 1.0,
+          "implication_proof_sound": 1.0
         },
         "reason_algorithm": {
           "memory_reduction_pct": 16.6351606805293,
           "compression_balance_pct": 16.6351606805293,
           "edge_reduction_pct": 22.486772486772487,
+          "final_regularized_memory_reduction_pct": 28.796400449943757,
+          "final_regularized_edge_reduction_pct": 30.28673835125448,
           "fanin_regularized": 1.0,
           "regularized_memory_overhead_pct": 43.53741496598639,
-          "semantics_preserved": 1.0
+          "semantics_preserved": 1.0,
+          "implication_proof_sound": 1.0
         }
       }
     },
@@ -26,8 +32,10 @@
           "memory_reduction_pct": 0.0,
           "compression_balance_pct": 0.0,
           "edge_reduction_pct": 0.0,
-          "fanin_regularized": 0.0,
-          "regularized_memory_overhead_pct": 0.0,
+          "final_regularized_memory_reduction_pct": 0.0,
+          "final_regularized_edge_reduction_pct": 0.0,
+          "fanin_regularized": 1.0,
+          "regularized_memory_overhead_pct": 153.59521544107653,
           "avg_loglik_retention_pct": 100.0,
           "avg_abs_loglik_delta": 0.0
         },
@@ -35,6 +43,8 @@
           "memory_reduction_pct": 27.47043631915183,
           "compression_balance_pct": 27.47043631915183,
           "edge_reduction_pct": 29.80825958702065,
+          "final_regularized_memory_reduction_pct": 32.49718604277215,
+          "final_regularized_edge_reduction_pct": 32.51810136765889,
           "fanin_regularized": 1.0,
           "regularized_memory_overhead_pct": 136.01949025487255,
           "avg_loglik_retention_pct": 100.0,
@@ -48,8 +58,10 @@
           "memory_reduction_pct": 0.0,
           "compression_balance_pct": 0.0,
           "edge_reduction_pct": 0.0,
-          "fanin_regularized": 0.0,
-          "regularized_memory_overhead_pct": 0.0,
+          "final_regularized_memory_reduction_pct": 0.0,
+          "final_regularized_edge_reduction_pct": 0.0,
+          "fanin_regularized": 1.0,
+          "regularized_memory_overhead_pct": 56.19834710743802,
           "avg_loglik_retention_pct": 100.0,
           "avg_abs_loglik_delta": 0.0
         },
@@ -57,6 +69,8 @@
           "memory_reduction_pct": 24.793388429752067,
           "compression_balance_pct": 24.793388429752067,
           "edge_reduction_pct": 25.0,
+          "final_regularized_memory_reduction_pct": 25.396825396825395,
+          "final_regularized_edge_reduction_pct": 25.53191489361702,
           "fanin_regularized": 1.0,
           "regularized_memory_overhead_pct": 54.94505494505494,
           "avg_loglik_retention_pct": 100.0,

@@ -20,10 +20,25 @@
           "coefficient": 1.0,
           "description": "Correctness constraint: the transformed logical workload must preserve the original satisfiability semantics."
         },
+        "implication_proof_sound": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Correctness constraint: every removed SAT literal must be justified by reachability in the binary-clause implication graph."
+        },
         "edge_reduction_pct": {
           "higher_is_better": true,
           "coefficient": 0.5,
           "description": "Held-out structural compression metric measuring the percent reduction in DAG edges."
+        },
+        "final_regularized_memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
+        },
+        "final_regularized_edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
         },
         "fanin_regularized": {
           "higher_is_better": true,
@@ -65,6 +80,16 @@
           "higher_is_better": true,
           "coefficient": 0.5,
           "description": "Held-out structural compression metric measuring the percent reduction in HMM transition DAG edges."
+        },
+        "final_regularized_memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
+        },
+        "final_regularized_edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
         },
         "fanin_regularized": {
           "higher_is_better": true,
@@ -111,6 +136,16 @@
           "higher_is_better": true,
           "coefficient": 0.5,
           "description": "Held-out structural compression metric measuring the percent reduction in probabilistic-circuit DAG edges."
+        },
+        "final_regularized_memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
+        },
+        "final_regularized_edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
         },
         "fanin_regularized": {
           "higher_is_better": true,

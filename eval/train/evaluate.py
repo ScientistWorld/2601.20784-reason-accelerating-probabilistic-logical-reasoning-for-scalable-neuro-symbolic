@@ -75,6 +75,14 @@ def compression_balance_pct(result: dict[str, Any]) -> float:
     return min(memory_reduction_pct(result), edge_reduction_pct(result))
 
 
+def final_regularized_memory_reduction_pct(result: dict[str, Any]) -> float:
+    baseline_regularized = result.get("baseline_regularized", result["baseline"])
+    reason = result["reason"]
+    return 100.0 * (
+        float(baseline_regularized["memory_units"]) - float(reason["memory_units"])
+    ) / float(baseline_regularized["memory_units"])
+
+
 def avg_abs_loglik_delta(result: dict[str, Any]) -> float:
     return abs(float(result["avg_loglik_after"]) - float(result["avg_loglik_before"]))
 
@@ -83,9 +91,11 @@ def train_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
     metrics = {
         "memory_reduction_pct": memory_reduction_pct(result),
         "compression_balance_pct": compression_balance_pct(result),
+        "final_regularized_memory_reduction_pct": final_regularized_memory_reduction_pct(result),
     }
     if exp_name == "sat_implication_pruning":
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
+        metrics["implication_proof_sound"] = float(result.get("implication_proof_sound", result["semantics_preserved"]))
     else:
         metrics["avg_loglik_retention_pct"] = float(result["avg_loglik_retention_pct"])
         metrics["avg_abs_loglik_delta"] = avg_abs_loglik_delta(result)

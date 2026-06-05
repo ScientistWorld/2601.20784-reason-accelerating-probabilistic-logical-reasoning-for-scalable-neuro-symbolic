@@ -22,4 +22,5 @@ A valid improvement must operate on logical/probabilistic reasoning graph transf
 - [ ] `scripts/evaluate.sh` is unchanged.
 - [ ] Scores are computed from artifacts, not hardcoded.
 - [ ] Metrics remain graph-size and fidelity metrics, not wall-clock timing.
+- [ ] Final-DAG compression is measured against an unpruned baseline that has also been converted to two-input form.
 - [ ] The method transforms reasoning graphs rather than training a surrogate predictor.

@@ -14,10 +14,13 @@ from method.sat_reason import run_sat
 
 def add_common_metrics(result: dict) -> dict:
     b = result["baseline"]
+    br = result["baseline_regularized"]
     p = result.get("pruned", result["reason"])
     r = result["reason"]
     result["memory_reduction_pct"] = 100.0 * (b["memory_units"] - p["memory_units"]) / b["memory_units"]
     result["edge_reduction_pct"] = 100.0 * (b["edges"] - p["edges"]) / b["edges"]
+    result["final_regularized_memory_reduction_pct"] = 100.0 * (br["memory_units"] - r["memory_units"]) / br["memory_units"]
+    result["final_regularized_edge_reduction_pct"] = 100.0 * (br["edges"] - r["edges"]) / br["edges"]
     result["fanin_regularized"] = 1.0 if r["max_fanin"] <= 2 else 0.0
     return result
 

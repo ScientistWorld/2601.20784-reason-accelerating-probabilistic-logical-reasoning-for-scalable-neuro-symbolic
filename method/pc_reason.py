@@ -64,6 +64,7 @@ def run_pc(instance: dict, prune_fraction: float = 0.30) -> dict:
     return {
         "kernel": "pc",
         "baseline": before.summary(),
+        "baseline_regularized": before.two_input_regularize().summary(),
         "pruned": after_prune.summary(),
         "reason": after.summary(),
         "sum_edges_before": len(weights),

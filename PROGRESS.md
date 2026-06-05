@@ -17,9 +17,9 @@ Continuation audit on 2026-06-05 rechecked the implementation and restored `core
 
 Current local results:
 
-- `sat_implication_pruning`: 16.635% memory reduction, semantics preserved = 1.0.
-- `hmm_flow_pruning`: 27.470% memory reduction, average likelihood retention = 100.0%.
-- `pc_flow_pruning`: 24.793% memory reduction, average likelihood retention = 100.0%.
+- `sat_implication_pruning`: 16.635% pruned memory reduction, 28.796% final regularized memory reduction, semantics preserved = 1.0, implication proof sound = 1.0.
+- `hmm_flow_pruning`: 27.470% pruned memory reduction, 32.497% final regularized memory reduction, average likelihood retention = 100.0%.
+- `pc_flow_pruning`: 24.793% pruned memory reduction, 25.397% final regularized memory reduction, average likelihood retention = 100.0%.
 
 Paper Table IV references used in `scoring/reference.json`:
 
@@ -45,7 +45,9 @@ After the SAT fix, local `scripts/reproduce.sh` passes and updates the SAT score
 
 CPU container job `d119c227-475` completed successfully after the SAT fix. It ran `scripts/run.sh`, regenerated the same corrected scores, and passed `python validate.py --compare`; milestone `core_claim` is restored.
 
-On 2026-06-05, the main evaluator was tightened to report every visible benefit and constraint metric defined in `scoring/reference.json`: memory reduction, compression balance, edge reduction, fan-in regularization, regularization memory overhead, satisfiability preservation, and probabilistic log-likelihood deltas. A local sequential run of `scripts/reproduce.sh`, `scripts/evaluate_train.sh`, `scripts/evaluate_test.sh`, and `python3 validate.py --compare` passes with these expanded scores. A CPU test job is being submitted to validate the updated scoring path in the compute container.
+On 2026-06-05, the main evaluator was tightened to report every visible benefit and constraint metric defined in `scoring/reference.json`: memory reduction, compression balance, edge reduction, fan-in regularization, regularization memory overhead, satisfiability preservation, and probabilistic log-likelihood deltas. A local sequential run of `scripts/reproduce.sh`, `scripts/evaluate_train.sh`, `scripts/evaluate_test.sh`, and `python3 validate.py --compare` passes with these expanded scores.
+
+Sub-agent audit identified a scoring integrity issue: final two-input regularization adds intermediate tree nodes, so final method DAG size should be compared against an unpruned baseline that has also been regularized. The artifacts and evaluators now include `baseline_regularized`, `final_regularized_memory_reduction_pct`, and `final_regularized_edge_reduction_pct`. SAT fidelity also now records `implication_proof_sound`, requiring each removed literal to be justified by implication-graph reachability.
 
 ## Deviations from Paper
 

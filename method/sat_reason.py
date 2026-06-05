@@ -70,6 +70,18 @@ def prune_hidden_literals(cnf: list[list[int]]) -> tuple[list[list[int]], int]:
     return pruned, removed
 
 
+def implication_pruning_is_sound(cnf: list[list[int]], original: list[list[int]], pruned: list[list[int]]) -> bool:
+    """Check each removed literal has a proof via the binary-clause implication graph."""
+    graph = implication_graph(cnf)
+    reach = {lit: reachable(graph, lit) for lit in graph}
+    for before, after in zip(original, pruned):
+        removed = set(before) - set(after)
+        for lit in removed:
+            if not any(kept in reach.get(lit, set()) for kept in after):
+                return False
+    return True
+
+
 def _simplify(cnf: list[list[int]], assignment: dict[int, bool]) -> list[list[int]] | None:
     simplified = []
     for clause in cnf:
@@ -140,15 +152,18 @@ def run_sat(instance: dict) -> dict:
     after = after_prune.two_input_regularize()
     original_sat = is_satisfiable(cnf)
     pruned_sat = is_satisfiable(pruned_cnf)
+    proof_sound = implication_pruning_is_sound(cnf, cnf, pruned_cnf)
     return {
         "kernel": "sat",
         "baseline": before.summary(),
+        "baseline_regularized": before.two_input_regularize().summary(),
         "pruned": after_prune.summary(),
         "reason": after.summary(),
         "removed_literals": removed,
         "clauses_before": len(cnf),
         "clauses_after": len(pruned_cnf),
-        "semantics_preserved": 1.0 if original_sat == pruned_sat else 0.0,
+        "semantics_preserved": 1.0 if proof_sound and original_sat == pruned_sat else 0.0,
+        "implication_proof_sound": 1.0 if proof_sound else 0.0,
         "original_satisfiable": 1.0 if original_sat else 0.0,
         "pruned_satisfiable": 1.0 if pruned_sat else 0.0,
     }
