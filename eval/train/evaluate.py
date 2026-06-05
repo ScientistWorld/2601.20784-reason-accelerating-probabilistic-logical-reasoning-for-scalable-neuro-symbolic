@@ -55,16 +55,31 @@ def load_artifacts(paths: list[Path]) -> dict[str, dict[str, Any]]:
     return artifacts
 
 
+def reduced_summary(result: dict[str, Any]) -> dict[str, Any]:
+    return result.get("pruned", result.get("reason"))
+
+
 def memory_reduction_pct(result: dict[str, Any]) -> float:
-    if "memory_reduction_pct" in result:
-        return float(result["memory_reduction_pct"])
     baseline = result["baseline"]
-    pruned = result.get("pruned", result.get("reason"))
+    pruned = reduced_summary(result)
     return 100.0 * (float(baseline["memory_units"]) - float(pruned["memory_units"])) / float(baseline["memory_units"])
 
 
+def edge_reduction_pct(result: dict[str, Any]) -> float:
+    baseline = result["baseline"]
+    pruned = reduced_summary(result)
+    return 100.0 * (float(baseline["edges"]) - float(pruned["edges"])) / float(baseline["edges"])
+
+
+def compression_balance_pct(result: dict[str, Any]) -> float:
+    return min(memory_reduction_pct(result), edge_reduction_pct(result))
+
+
 def train_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
-    metrics = {"memory_reduction_pct": memory_reduction_pct(result)}
+    metrics = {
+        "memory_reduction_pct": memory_reduction_pct(result),
+        "compression_balance_pct": compression_balance_pct(result),
+    }
     if exp_name == "sat_implication_pruning":
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
     else:
@@ -80,7 +95,7 @@ def main() -> None:
     args = parser.parse_args()
 
     artifacts = load_artifacts(discover_artifacts(args.artifact, args.artifact_dir))
-    scores: dict[str, Any] = {"experiments": {}}
+    scores: dict[str, Any] = {"slice": "train", "experiments": {}}
     for exp_name in sorted(EXPERIMENTS):
         exp_results: dict[str, dict[str, float]] = {}
         for method_name, payload in sorted(artifacts.items()):

@@ -54,6 +54,10 @@ def load_artifacts(paths: list[Path]) -> dict[str, dict[str, Any]]:
     return artifacts
 
 
+def reduced_summary(result: dict[str, Any]) -> dict[str, Any]:
+    return result.get("pruned", result.get("reason"))
+
+
 def method_names_from_train_scores(path: str) -> list[str] | None:
     train_path = Path(path)
     if not train_path.exists():
@@ -66,29 +70,37 @@ def method_names_from_train_scores(path: str) -> list[str] | None:
 
 
 def edge_reduction_pct(result: dict[str, Any]) -> float:
-    if "edge_reduction_pct" in result:
-        return float(result["edge_reduction_pct"])
     baseline = result["baseline"]
-    pruned = result.get("pruned", result.get("reason"))
+    pruned = reduced_summary(result)
     return 100.0 * (float(baseline["edges"]) - float(pruned["edges"])) / float(baseline["edges"])
 
 
 def fanin_regularized(result: dict[str, Any]) -> float:
-    if "fanin_regularized" in result:
-        return float(result["fanin_regularized"])
     reason = result["reason"]
     return 1.0 if float(reason["max_fanin"]) <= 2.0 else 0.0
+
+
+def regularized_memory_overhead_pct(result: dict[str, Any]) -> float:
+    baseline = result["baseline"]
+    reason = result["reason"]
+    return 100.0 * (float(reason["memory_units"]) - float(baseline["memory_units"])) / float(baseline["memory_units"])
+
+
+def avg_abs_loglik_delta(result: dict[str, Any]) -> float:
+    return abs(float(result["avg_loglik_after"]) - float(result["avg_loglik_before"]))
 
 
 def test_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
     metrics = {
         "edge_reduction_pct": edge_reduction_pct(result),
         "fanin_regularized": fanin_regularized(result),
+        "regularized_memory_overhead_pct": regularized_memory_overhead_pct(result),
     }
     if exp_name == "sat_implication_pruning":
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
     else:
         metrics["avg_loglik_retention_pct"] = float(result["avg_loglik_retention_pct"])
+        metrics["avg_abs_loglik_delta"] = avg_abs_loglik_delta(result)
     return metrics
 
 
@@ -110,7 +122,7 @@ def main() -> None:
             raise KeyError(f"missing artifacts for train-scored methods: {', '.join(missing)}")
         method_names = train_method_names
 
-    scores: dict[str, Any] = {"experiments": {}}
+    scores: dict[str, Any] = {"slice": "test", "experiments": {}}
     for exp_name in sorted(EXPERIMENTS):
         exp_results: dict[str, dict[str, float]] = {}
         for method_name in method_names:

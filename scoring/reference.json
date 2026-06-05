@@ -5,8 +5,21 @@
       "weight": 0.25,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
-        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "semantics_preserved": {"higher_is_better": true, "coefficient": 1.0},
+        "memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Visible compression benefit: percent reduction in reduced DAG memory units relative to the unpruned DAG."
+        },
+        "compression_balance_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.35,
+          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
+        },
+        "semantics_preserved": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Correctness constraint: the pruned logical workload must preserve the original satisfiability semantics."
+        },
         "edge_reduction_pct": {
           "higher_is_better": true,
           "coefficient": 0.5,
@@ -16,6 +29,11 @@
           "higher_is_better": true,
           "coefficient": 0.25,
           "description": "Constraint metric checking whether the transformed reasoning DAG keeps local fan-in bounded."
+        },
+        "regularized_memory_overhead_pct": {
+          "higher_is_better": false,
+          "coefficient": -0.15,
+          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
         }
       },
       "results": {
@@ -28,8 +46,21 @@
       "weight": 0.35,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
-        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Visible compression benefit: percent reduction in reduced HMM DAG memory units relative to the unpruned DAG."
+        },
+        "compression_balance_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.35,
+          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
+        },
+        "avg_loglik_retention_pct": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Likelihood-retention constraint: retained average sequence likelihood expressed as a percentage of the unpruned workload."
+        },
         "edge_reduction_pct": {
           "higher_is_better": true,
           "coefficient": 0.5,
@@ -39,6 +70,16 @@
           "higher_is_better": true,
           "coefficient": 0.25,
           "description": "Constraint metric checking whether the transformed sequential reasoning DAG keeps local fan-in bounded."
+        },
+        "regularized_memory_overhead_pct": {
+          "higher_is_better": false,
+          "coefficient": -0.15,
+          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
+        },
+        "avg_abs_loglik_delta": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after pruning."
         }
       },
       "results": {
@@ -51,8 +92,21 @@
       "weight": 0.40,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
-        "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "memory_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Visible compression benefit: percent reduction in reduced probabilistic-circuit DAG memory units relative to the unpruned DAG."
+        },
+        "compression_balance_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.35,
+          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
+        },
+        "avg_loglik_retention_pct": {
+          "higher_is_better": true,
+          "coefficient": 1.0,
+          "description": "Likelihood-retention constraint: retained average sample likelihood expressed as a percentage of the unpruned workload."
+        },
         "edge_reduction_pct": {
           "higher_is_better": true,
           "coefficient": 0.5,
@@ -62,6 +116,16 @@
           "higher_is_better": true,
           "coefficient": 0.25,
           "description": "Constraint metric checking whether the transformed probabilistic-circuit DAG keeps local fan-in bounded."
+        },
+        "regularized_memory_overhead_pct": {
+          "higher_is_better": false,
+          "coefficient": -0.15,
+          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
+        },
+        "avg_abs_loglik_delta": {
+          "higher_is_better": false,
+          "coefficient": -0.2,
+          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after pruning."
         }
       },
       "results": {
