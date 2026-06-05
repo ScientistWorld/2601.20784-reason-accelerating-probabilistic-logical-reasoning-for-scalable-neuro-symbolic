@@ -1,9 +1,6 @@
-# This iteration writes files only — do NOT submit compute jobs.
-# Once you set action to 'done', STOP immediately.
-# Do NOT sleep, poll, or wait. The system reads this file
-# only after your turn ends.
-action: done
+# Run split evaluation and wake the agent when the job finishes.
+action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Improvements: recomputed aggregate metrics from artifact summaries, added compression-balance and held-out overhead/likelihood-delta constraints, added slice markers, completed metric descriptions. Notes: see DESIGN_NOTES.md."
+notes: "Run scripts/evaluate_train.sh and scripts/evaluate_test.sh against checkpoints artifacts to populate split scores."
