@@ -11,11 +11,13 @@ The REASON Sec. IV algorithmic pipeline runs end to end:
 
 `scripts/reproduce.sh` generates deterministic fixtures, runs the unpruned baseline, runs the REASON method, evaluates artifacts through `eval/`, writes `scoring/scores.json`, and passes `python validate.py --compare` locally and in the compute container.
 
+Continuation audit on 2026-06-05 rechecked the implementation and restored `core_claim`: `method/` contains the paper-identifiable DAG unification, adaptive pruning, and two-input regularization steps; `eval/` only reads artifacts; and standalone `scripts/evaluate.sh` plus full `scripts/reproduce.sh` both pass validation.
+
 ## Results
 
 Current local results:
 
-- `sat_implication_pruning`: 16.257% memory reduction, semantics preserved = 1.0.
+- `sat_implication_pruning`: 16.635% memory reduction, semantics preserved = 1.0.
 - `hmm_flow_pruning`: 27.470% memory reduction, average likelihood retention = 100.0%.
 - `pc_flow_pruning`: 24.793% memory reduction, average likelihood retention = 100.0%.
 
