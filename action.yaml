@@ -1,6 +1,6 @@
-# Run split evaluation and wake the agent when the job finishes.
-action: submit
+# Split evaluation complete.
+action: done
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Re-run split evaluation after adding unsaturated train likelihood-delta constraint and zero-weighting saturated retention diagnostic."
+notes: "Artifact metric split; 11 train metric fields and 14 test metric fields per method across 3 experiments. REASON improves train memory 16.6/27.5/24.8% and test edge 22.5/29.8/25.0%; fan-in constraint passes, regularized overhead is 19.7/71.2/16.5%. Retention percentage is zero-weight diagnostic due saturation; likelihood delta is active."
