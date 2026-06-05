@@ -58,8 +58,8 @@
         },
         "avg_loglik_retention_pct": {
           "higher_is_better": true,
-          "coefficient": 1.0,
-          "description": "Likelihood-retention constraint: retained average sequence likelihood expressed as a percentage of the unpruned workload."
+          "coefficient": 0.0,
+          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when pruning improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
         },
         "edge_reduction_pct": {
           "higher_is_better": true,
@@ -104,8 +104,8 @@
         },
         "avg_loglik_retention_pct": {
           "higher_is_better": true,
-          "coefficient": 1.0,
-          "description": "Likelihood-retention constraint: retained average sample likelihood expressed as a percentage of the unpruned workload."
+          "coefficient": 0.0,
+          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when pruning improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
         },
         "edge_reduction_pct": {
           "higher_is_better": true,

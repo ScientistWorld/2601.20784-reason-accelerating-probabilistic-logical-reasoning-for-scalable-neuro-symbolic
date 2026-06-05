@@ -3,4 +3,4 @@ action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "Run scripts/evaluate_train.sh and scripts/evaluate_test.sh against checkpoints artifacts to populate split scores."
+notes: "Re-run split evaluation after adding unsaturated train likelihood-delta constraint and zero-weighting saturated retention diagnostic."

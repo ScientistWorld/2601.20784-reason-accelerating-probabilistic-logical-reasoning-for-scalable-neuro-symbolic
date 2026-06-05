@@ -75,6 +75,10 @@ def compression_balance_pct(result: dict[str, Any]) -> float:
     return min(memory_reduction_pct(result), edge_reduction_pct(result))
 
 
+def avg_abs_loglik_delta(result: dict[str, Any]) -> float:
+    return abs(float(result["avg_loglik_after"]) - float(result["avg_loglik_before"]))
+
+
 def train_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
     metrics = {
         "memory_reduction_pct": memory_reduction_pct(result),
@@ -84,6 +88,7 @@ def train_metrics(exp_name: str, result: dict[str, Any]) -> dict[str, float]:
         metrics["semantics_preserved"] = float(result["semantics_preserved"])
     else:
         metrics["avg_loglik_retention_pct"] = float(result["avg_loglik_retention_pct"])
+        metrics["avg_abs_loglik_delta"] = avg_abs_loglik_delta(result)
     return metrics
 
 
