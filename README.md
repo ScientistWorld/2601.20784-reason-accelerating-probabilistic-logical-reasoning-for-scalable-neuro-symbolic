@@ -57,17 +57,23 @@ The primary algorithmic claim is that unified DAG construction plus adaptive pru
 
 ## Metrics
 
-`memory_reduction_pct` measures the percentage reduction in graph memory units, where a memory unit is one stored node or one stored edge in the compiled reasoning DAG. Higher is better.
+`memory_reduction_pct` measures the percentage reduction in graph memory units, where a memory unit is one stored node or one stored edge in the compiled reasoning graph. Higher is better.
 
 `edge_reduction_pct` measures the percentage reduction in stored graph edges. Higher is better.
 
 `compression_balance_pct` is the smaller of `memory_reduction_pct` and `edge_reduction_pct`, rewarding methods that reduce both storage dimensions rather than improving only one.
 
-`fanin_regularized` is 1 when the final graph keeps local fan-in within the required bound and 0 otherwise. Higher is better.
+`final_regularized_memory_reduction_pct` measures memory reduction after both the candidate graph and the uncompressed reference graph are expressed through the same bounded-local-interface format. Higher is better.
 
-`regularized_memory_overhead_pct` measures extra memory introduced by the final bounded-fan-in representation relative to the reduced graph. Lower is better.
+`final_regularized_edge_reduction_pct` measures edge reduction under that same final bounded-local-interface format. Higher is better.
+
+`fanin_regularized` is 1 when the final graph satisfies the benchmark's local-interface bound and 0 otherwise. Higher is better.
+
+`regularized_memory_overhead_pct` measures extra memory introduced by the final bounded-local-interface representation relative to the reduced graph. Lower is better.
 
 `semantics_preserved` is used for logical workloads and is 1 when the transformed formula preserves satisfiability semantics. Higher is better.
+
+`implication_proof_sound` is used for logical workloads and is 1 when every removed logical element has a valid artifact-level justification under the benchmark dependency rules. Higher is better.
 
 `avg_loglik_retention_pct` is used for probabilistic workloads and is `100 * exp(avg_loglik_after - avg_loglik_before)` over the fixed evaluation sequences or samples. Higher is better, with 100 meaning no likelihood loss.
 
@@ -75,7 +81,7 @@ The primary algorithmic claim is that unified DAG construction plus adaptive pru
 
 ## Baselines and Targets
 
-The baseline is the unpruned DAG representation of each workload. The target is a transformed graph that reduces memory while retaining logical or probabilistic behavior. Paper-reported algorithm optimization targets from Table IV are used as references: 21% memory reduction with unchanged 81% accuracy for AlphaGeometry/MiniF2F-style logical reasoning, 29% memory reduction with 86/87 success-rate retention for Ctrl-G/CoAuthor-style HMM reasoning, and 37% memory reduction with 0.752/0.758 AUPRC retention for R2-Guard/TwinSafety-style probabilistic reasoning.
+The baseline is the uncompressed graph representation of each workload. The target is a transformed graph that reduces memory while retaining logical or probabilistic behavior. Paper-reported algorithm optimization targets from Table IV are used as references: 21% memory reduction with unchanged 81% accuracy for AlphaGeometry/MiniF2F-style logical reasoning, 29% memory reduction with 86/87 success-rate retention for Ctrl-G/CoAuthor-style HMM reasoning, and 37% memory reduction with 0.752/0.758 AUPRC retention for R2-Guard/TwinSafety-style probabilistic reasoning.
 
 ## Evaluation Protocol
 
@@ -282,6 +288,40 @@ Run `scripts/reproduce.sh` or run `scripts/baseline.sh`, `scripts/method.sh`, an
 ### [2026-06-05 00:45] - core_claim
 - Final verification confirmed method/eval separation, method-agnostic scoring docs, reusable artifact-based evaluation, and train/test evaluator consistency.
 - Fixed evaluator method-name handling and refreshed documentation; `python3 validate.py --compare` passes.
+
+</details>
+
+### Iteration 9: gpt-5.5 (verifier)
+- **Milestone**: `core_claim` | **Status**: done
+- **Working time**: 12m | **GPU**: 0.0h
+- **Jobs**: 5 total (4 completed, 1 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-06-04 00:00] - method_runs
+- Implemented the REASON Sec. IV algorithmic pipeline for CNF/SAT, HMM, and probabilistic-circuit kernels.
+- Verified that unified DAG construction, adaptive pruning, and two-input regularization execute end to end.
+
+### [2026-06-04 00:00] - core_claim
+- Reproduced the core algorithmic claim on deterministic kernel benchmarks: reasoning DAGs are reduced while preserving logical satisfiability or probabilistic likelihood.
+- `scripts/reproduce.sh` writes method and baseline artifacts, `scripts/evaluate.sh` scores those artifacts without importing `method/`, and `python3 validate.py --compare` passes.
+
+### [2026-06-05 00:00] - core_claim
+- Continuation audit restored `core_claim` after re-reading `method/`, `eval/`, scripts, scoring, and briefing deliverables.
+- Re-ran standalone `scripts/evaluate.sh` and full `scripts/reproduce.sh`; both regenerated scores and passed `python3 validate.py --compare`.
+
+### [2026-06-05 00:30] - core_claim
+- Expanded `scripts/evaluate.sh` scoring output to include all benefit and constraint metrics defined in `scoring/reference.json`.
+- Local full reproduction and train/test evaluator passes validate; a CPU container job is being submitted to verify the patched scoring path.
+
+### [2026-06-05 00:45] - core_claim
+- Final verification confirmed method/eval separation, method-agnostic scoring docs, reusable artifact-based evaluation, and train/test evaluator consistency.
+- Fixed evaluator method-name handling and refreshed documentation; `python3 validate.py --compare` passes.
+
+### [2026-06-05 01:15] - core_claim
+- Strengthened scoring after a sub-agent audit: final regularized DAG compression is now measured against an unpruned baseline after the same two-input regularization step.
+- SAT pruning artifacts now include an implication-reachability proof check for removed literals, in addition to satisfiability preservation.
 
 </details>
 
