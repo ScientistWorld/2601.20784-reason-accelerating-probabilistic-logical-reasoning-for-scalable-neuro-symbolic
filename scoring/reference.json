@@ -6,7 +6,17 @@
       "primary_metric": "memory_reduction_pct",
       "metrics": {
         "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "semantics_preserved": {"higher_is_better": true, "coefficient": 1.0}
+        "semantics_preserved": {"higher_is_better": true, "coefficient": 1.0},
+        "edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Held-out structural compression metric measuring the percent reduction in DAG edges."
+        },
+        "fanin_regularized": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Constraint metric checking whether the transformed reasoning DAG keeps local fan-in bounded."
+        }
       },
       "results": {
         "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "semantics_preserved": 1.0},
@@ -19,7 +29,17 @@
       "primary_metric": "memory_reduction_pct",
       "metrics": {
         "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0}
+        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Held-out structural compression metric measuring the percent reduction in HMM transition DAG edges."
+        },
+        "fanin_regularized": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Constraint metric checking whether the transformed sequential reasoning DAG keeps local fan-in bounded."
+        }
       },
       "results": {
         "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
@@ -32,7 +52,17 @@
       "primary_metric": "memory_reduction_pct",
       "metrics": {
         "memory_reduction_pct": {"higher_is_better": true, "coefficient": 1.0},
-        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0}
+        "avg_loglik_retention_pct": {"higher_is_better": true, "coefficient": 1.0},
+        "edge_reduction_pct": {
+          "higher_is_better": true,
+          "coefficient": 0.5,
+          "description": "Held-out structural compression metric measuring the percent reduction in probabilistic-circuit DAG edges."
+        },
+        "fanin_regularized": {
+          "higher_is_better": true,
+          "coefficient": 0.25,
+          "description": "Constraint metric checking whether the transformed probabilistic-circuit DAG keeps local fan-in bounded."
+        }
       },
       "results": {
         "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
