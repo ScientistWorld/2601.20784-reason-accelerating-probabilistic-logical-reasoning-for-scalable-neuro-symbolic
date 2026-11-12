@@ -1,0 +1,73 @@
+{
+  "slice": "test",
+  "experiments": {
+    "sat_implication_pruning": {
+      "results": {
+        "random_search": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "read_hidden_test": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "refit_small": {
+          "memory_reduction_pct": 41.26133277582513
+        }
+      }
+    },
+    "hmm_flow_pruning": {
+      "results": {
+        "random_search": {
+          "ll_retention_pct_mem40": 48.124306352297765,
+          "ll_retention_pct_mem30": 35.181525558448826,
+          "ll_retention_pct_mem20": 28.857952048392374
+        },
+        "read_hidden_test": {
+          "ll_retention_pct_mem40": 101.54652413857481,
+          "ll_retention_pct_mem30": 99.97259689976339,
+          "ll_retention_pct_mem20": 87.80261237273106
+        },
+        "refit_small": {
+          "ll_retention_pct_mem40": 70.82993758072219,
+          "ll_retention_pct_mem30": 70.50492276183365,
+          "ll_retention_pct_mem20": 70.8008960135563
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "random_search": {
+          "ll_retention_pct_mem20": 5.704532659312772,
+          "ll_retention_pct_mem15": 4.7607839839703185,
+          "ll_retention_pct_mem12": 2.234169833705732
+        },
+        "read_hidden_test": {
+          "ll_retention_pct_mem20": 105.09479525802494,
+          "ll_retention_pct_mem15": 104.43941296887753,
+          "ll_retention_pct_mem12": 103.4814734931459
+        },
+        "refit_small": {
+          "ll_retention_pct_mem20": 43.342801324817856,
+          "ll_retention_pct_mem15": 52.893770612582074,
+          "ll_retention_pct_mem12": 58.77622391970486
+        }
+      }
+    }
+  },
+  "_status": {
+    "random_search": {
+      "manifest": "checkpoints/random_search.json",
+      "failed": false,
+      "reason": ""
+    },
+    "read_hidden_test": {
+      "manifest": "checkpoints/read_hidden_test.json",
+      "failed": false,
+      "reason": ""
+    },
+    "refit_small": {
+      "manifest": "checkpoints/refit_small.json",
+      "failed": false,
+      "reason": ""
+    }
+  }
+}

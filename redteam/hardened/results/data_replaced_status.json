@@ -1,0 +1,10 @@
+{
+  "group": "data_replaced",
+  "methods": [
+    "reason_algorithm"
+  ],
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "arguments": [],
+  "test_exit": 0,
+  "test_seconds": 22.5
+}

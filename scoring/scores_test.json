@@ -1,65 +1,55 @@
 {
   "slice": "test",
   "experiments": {
+    "sat_implication_pruning": {
+      "results": {
+        "magnitude_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "reason_algorithm": {
+          "memory_reduction_pct": 41.26133277582513
+        }
+      }
+    },
     "hmm_flow_pruning": {
       "results": {
-        "reason_algorithm": {
-          "edge_reduction_pct": 29.80825958702065,
-          "final_regularized_edge_reduction_pct": 32.51810136765889,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 136.01949025487255,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.07888837334467524
+        "magnitude_pruning": {
+          "ll_retention_pct_mem40": 97.87286341213722,
+          "ll_retention_pct_mem30": 93.13160928013582,
+          "ll_retention_pct_mem20": 63.969651005686636
         },
-        "unpruned_dag": {
-          "edge_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 153.59521544107653,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.0
+        "reason_algorithm": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
         }
       }
     },
     "pc_flow_pruning": {
       "results": {
-        "reason_algorithm": {
-          "edge_reduction_pct": 25.0,
-          "final_regularized_edge_reduction_pct": 25.53191489361702,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 54.94505494505494,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.002930593379448787
+        "magnitude_pruning": {
+          "ll_retention_pct_mem20": 98.18945864585504,
+          "ll_retention_pct_mem15": 94.39087427575758,
+          "ll_retention_pct_mem12": 89.16003879739111
         },
-        "unpruned_dag": {
-          "edge_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 56.19834710743802,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.0
+        "reason_algorithm": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
         }
       }
+    }
+  },
+  "_status": {
+    "magnitude_pruning": {
+      "manifest": "checkpoints/magnitude_pruning.json",
+      "failed": false,
+      "reason": ""
     },
-    "sat_implication_pruning": {
-      "results": {
-        "reason_algorithm": {
-          "edge_reduction_pct": 22.486772486772487,
-          "final_regularized_edge_reduction_pct": 30.28673835125448,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 43.53741496598639,
-          "semantics_preserved": 1.0,
-          "implication_proof_sound": 1.0
-        },
-        "unpruned_dag": {
-          "edge_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 68.05293005671078,
-          "semantics_preserved": 1.0,
-          "implication_proof_sound": 1.0
-        }
-      }
+    "reason_algorithm": {
+      "manifest": "checkpoints/reason_algorithm.json",
+      "failed": false,
+      "reason": ""
     }
   }
 }

@@ -1,0 +1,19 @@
+{
+  "group": "shortcuts",
+  "methods": [
+    "unpruned_claims",
+    "inflated_likelihood",
+    "memory_padding",
+    "non_decomposable",
+    "sat_drop_clauses",
+    "sat_empty_clause",
+    "crash_on_pc",
+    "null_output",
+    "cached_train_answers",
+    "direct_score_write"
+  ],
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "arguments": [],
+  "test_exit": 0,
+  "test_seconds": 73.5
+}

@@ -1,0 +1,12 @@
+{
+  "group": "slow",
+  "methods": [
+    "refit_small",
+    "random_search",
+    "read_hidden_test"
+  ],
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "arguments": [],
+  "test_exit": 0,
+  "test_seconds": 154.3
+}

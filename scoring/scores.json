@@ -1,82 +1,55 @@
 {
+  "slice": "train",
   "experiments": {
     "sat_implication_pruning": {
       "results": {
-        "unpruned_dag": {
-          "memory_reduction_pct": 0.0,
-          "compression_balance_pct": 0.0,
-          "edge_reduction_pct": 0.0,
-          "final_regularized_memory_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 68.05293005671078,
-          "semantics_preserved": 1.0,
-          "implication_proof_sound": 1.0
+        "magnitude_pruning": {
+          "memory_reduction_pct": 0.0
         },
         "reason_algorithm": {
-          "memory_reduction_pct": 16.6351606805293,
-          "compression_balance_pct": 16.6351606805293,
-          "edge_reduction_pct": 22.486772486772487,
-          "final_regularized_memory_reduction_pct": 28.796400449943757,
-          "final_regularized_edge_reduction_pct": 30.28673835125448,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 43.53741496598639,
-          "semantics_preserved": 1.0,
-          "implication_proof_sound": 1.0
+          "memory_reduction_pct": 36.76851762732664
         }
       }
     },
     "hmm_flow_pruning": {
       "results": {
-        "unpruned_dag": {
-          "memory_reduction_pct": 0.0,
-          "compression_balance_pct": 0.0,
-          "edge_reduction_pct": 0.0,
-          "final_regularized_memory_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 153.59521544107653,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.0
+        "magnitude_pruning": {
+          "ll_retention_pct_mem40": 97.77862914382172,
+          "ll_retention_pct_mem30": 93.01620026801046,
+          "ll_retention_pct_mem20": 63.92143738443414
         },
         "reason_algorithm": {
-          "memory_reduction_pct": 27.47043631915183,
-          "compression_balance_pct": 27.47043631915183,
-          "edge_reduction_pct": 29.80825958702065,
-          "final_regularized_memory_reduction_pct": 32.49718604277215,
-          "final_regularized_edge_reduction_pct": 32.51810136765889,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 136.01949025487255,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.07888837334467524
+          "ll_retention_pct_mem40": 97.54946728954728,
+          "ll_retention_pct_mem30": 93.6820059755859,
+          "ll_retention_pct_mem20": 76.42838616613071
         }
       }
     },
     "pc_flow_pruning": {
       "results": {
-        "unpruned_dag": {
-          "memory_reduction_pct": 0.0,
-          "compression_balance_pct": 0.0,
-          "edge_reduction_pct": 0.0,
-          "final_regularized_memory_reduction_pct": 0.0,
-          "final_regularized_edge_reduction_pct": 0.0,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 56.19834710743802,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.0
+        "magnitude_pruning": {
+          "ll_retention_pct_mem20": 98.42002760694112,
+          "ll_retention_pct_mem15": 93.92824779929487,
+          "ll_retention_pct_mem12": 86.20207401579844
         },
         "reason_algorithm": {
-          "memory_reduction_pct": 24.793388429752067,
-          "compression_balance_pct": 24.793388429752067,
-          "edge_reduction_pct": 25.0,
-          "final_regularized_memory_reduction_pct": 25.396825396825395,
-          "final_regularized_edge_reduction_pct": 25.53191489361702,
-          "fanin_regularized": 1.0,
-          "regularized_memory_overhead_pct": 54.94505494505494,
-          "avg_loglik_retention_pct": 100.0,
-          "avg_abs_loglik_delta": 0.002930593379448787
+          "ll_retention_pct_mem20": 99.7780732589948,
+          "ll_retention_pct_mem15": 98.33140766239336,
+          "ll_retention_pct_mem12": 95.41499576073085
         }
       }
+    }
+  },
+  "_status": {
+    "magnitude_pruning": {
+      "manifest": "checkpoints/magnitude_pruning.json",
+      "failed": false,
+      "reason": ""
+    },
+    "reason_algorithm": {
+      "manifest": "checkpoints/reason_algorithm.json",
+      "failed": false,
+      "reason": ""
     }
   }
 }

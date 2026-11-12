@@ -1,0 +1,37 @@
+{
+  "slice": "test",
+  "experiments": {
+    "sat_implication_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "memory_reduction_pct": 41.26133277582513
+        }
+      }
+    },
+    "hmm_flow_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "reason_algorithm": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        }
+      }
+    }
+  },
+  "_status": {
+    "reason_algorithm": {
+      "manifest": "checkpoints/reason_algorithm.json",
+      "failed": false,
+      "reason": ""
+    }
+  }
+}

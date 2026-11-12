@@ -1,8 +1,8 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: pending
+action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: ""
+notes: "CPU job: scripts/run.sh reruns the full reference reproduction (scripts/reproduce.sh: data, baseline + REASON manifests, train slice, hidden test slice, validate.py), then the hardened audit through the unchanged no-argument evaluate_test.sh: quality variants (REASON, magnitude baseline, better iterative EM, random pruning, tiny model), shortcuts (unpruned claims, inflated likelihood, memory padding, non-decomposable, SAT clause dropping and empty clause, crash, null output, cached answers, direct score write), slow attacks (refit, random search, reading the hidden test), and a check that corrupting the public data does not change hidden scores. Results go to redteam/hardened/results/."

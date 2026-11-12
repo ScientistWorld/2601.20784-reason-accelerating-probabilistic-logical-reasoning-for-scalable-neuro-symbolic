@@ -1,0 +1,109 @@
+{
+  "slice": "test",
+  "experiments": {
+    "sat_implication_pruning": {
+      "results": {
+        "better_iterative_em": {
+          "memory_reduction_pct": 72.4512909016062
+        },
+        "magnitude_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "random_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "reason_algorithm": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "tiny_model": {
+          "memory_reduction_pct": 41.26133277582513
+        }
+      }
+    },
+    "hmm_flow_pruning": {
+      "results": {
+        "better_iterative_em": {
+          "ll_retention_pct_mem40": 98.8775037745437,
+          "ll_retention_pct_mem30": 97.46758788874448,
+          "ll_retention_pct_mem20": 91.28260394021841
+        },
+        "magnitude_pruning": {
+          "ll_retention_pct_mem40": 97.87286341213722,
+          "ll_retention_pct_mem30": 93.13160928013582,
+          "ll_retention_pct_mem20": 63.969651005686636
+        },
+        "random_pruning": {
+          "ll_retention_pct_mem40": 45.53776502377581,
+          "ll_retention_pct_mem30": 35.994755630864574,
+          "ll_retention_pct_mem20": 29.131350010754264
+        },
+        "reason_algorithm": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "tiny_model": {
+          "ll_retention_pct_mem40": 70.40243541205463,
+          "ll_retention_pct_mem30": 70.40243541205463,
+          "ll_retention_pct_mem20": 70.40243541205463
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "better_iterative_em": {
+          "ll_retention_pct_mem20": 103.51652650246098,
+          "ll_retention_pct_mem15": 102.92817760365568,
+          "ll_retention_pct_mem12": 101.8898432236845
+        },
+        "magnitude_pruning": {
+          "ll_retention_pct_mem20": 98.18945864585504,
+          "ll_retention_pct_mem15": 94.39087427575758,
+          "ll_retention_pct_mem12": 89.16003879739111
+        },
+        "random_pruning": {
+          "ll_retention_pct_mem20": 1.4998519919777435,
+          "ll_retention_pct_mem15": 3.2622095379875398,
+          "ll_retention_pct_mem12": 1.2989589107026336
+        },
+        "reason_algorithm": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        },
+        "tiny_model": {
+          "ll_retention_pct_mem20": 94.50688947175371,
+          "ll_retention_pct_mem15": 94.50688947175371,
+          "ll_retention_pct_mem12": 94.50688947175371
+        }
+      }
+    }
+  },
+  "_status": {
+    "better_iterative_em": {
+      "manifest": "checkpoints/better_iterative_em.json",
+      "failed": false,
+      "reason": ""
+    },
+    "magnitude_pruning": {
+      "manifest": "checkpoints/magnitude_pruning.json",
+      "failed": false,
+      "reason": ""
+    },
+    "random_pruning": {
+      "manifest": "checkpoints/random_pruning.json",
+      "failed": false,
+      "reason": ""
+    },
+    "reason_algorithm": {
+      "manifest": "checkpoints/reason_algorithm.json",
+      "failed": false,
+      "reason": ""
+    },
+    "tiny_model": {
+      "manifest": "checkpoints/tiny_model.json",
+      "failed": false,
+      "reason": ""
+    }
+  }
+}

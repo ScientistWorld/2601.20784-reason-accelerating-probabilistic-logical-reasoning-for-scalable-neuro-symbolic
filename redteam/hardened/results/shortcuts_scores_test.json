@@ -1,0 +1,199 @@
+{
+  "slice": "test",
+  "experiments": {
+    "sat_implication_pruning": {
+      "results": {
+        "cached_train_answers": {
+          "memory_reduction_pct": 0.0
+        },
+        "crash_on_pc": {
+          "memory_reduction_pct": 0.0
+        },
+        "direct_score_write": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "inflated_likelihood": {
+          "memory_reduction_pct": 0.0
+        },
+        "memory_padding": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "non_decomposable": {
+          "memory_reduction_pct": 0.0
+        },
+        "null_output": {
+          "memory_reduction_pct": 0.0
+        },
+        "sat_drop_clauses": {
+          "memory_reduction_pct": 0.0
+        },
+        "sat_empty_clause": {
+          "memory_reduction_pct": 0.0
+        },
+        "unpruned_claims": {
+          "memory_reduction_pct": 0.0
+        }
+      }
+    },
+    "hmm_flow_pruning": {
+      "results": {
+        "cached_train_answers": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "crash_on_pc": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "direct_score_write": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "inflated_likelihood": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "memory_padding": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "non_decomposable": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "null_output": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "sat_drop_clauses": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "sat_empty_clause": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "unpruned_claims": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "cached_train_answers": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "crash_on_pc": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "direct_score_write": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        },
+        "inflated_likelihood": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "memory_padding": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        },
+        "non_decomposable": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "null_output": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "sat_drop_clauses": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "sat_empty_clause": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        },
+        "unpruned_claims": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      }
+    }
+  },
+  "_status": {
+    "cached_train_answers": {
+      "manifest": "checkpoints/cached_train_answers.json",
+      "failed": true,
+      "reason": "output clause [-19, 5] is not entailed by the input formula (no)"
+    },
+    "crash_on_pc": {
+      "manifest": "checkpoints/crash_on_pc.json",
+      "failed": true,
+      "reason": "method exited with code 1"
+    },
+    "direct_score_write": {
+      "manifest": "checkpoints/direct_score_write.json",
+      "failed": false,
+      "reason": ""
+    },
+    "inflated_likelihood": {
+      "manifest": "checkpoints/inflated_likelihood.json",
+      "failed": true,
+      "reason": "emission row of reachable state 0 does not sum to 1"
+    },
+    "memory_padding": {
+      "manifest": "checkpoints/memory_padding.json",
+      "failed": false,
+      "reason": ""
+    },
+    "non_decomposable": {
+      "manifest": "checkpoints/non_decomposable.json",
+      "failed": true,
+      "reason": "product 1106 is not decomposable"
+    },
+    "null_output": {
+      "manifest": "checkpoints/null_output.json",
+      "failed": true,
+      "reason": "output must contain one model per budget under 'models'"
+    },
+    "sat_drop_clauses": {
+      "manifest": "checkpoints/sat_drop_clauses.json",
+      "failed": true,
+      "reason": "input clause [-164, 80] is not entailed by the output formula (no)"
+    },
+    "sat_empty_clause": {
+      "manifest": "checkpoints/sat_empty_clause.json",
+      "failed": true,
+      "reason": "output clause [] is not entailed by the input formula (no)"
+    },
+    "unpruned_claims": {
+      "manifest": "checkpoints/unpruned_claims.json",
+      "failed": true,
+      "reason": "model memory 194837 exceeds budget 77934"
+    }
+  }
+}

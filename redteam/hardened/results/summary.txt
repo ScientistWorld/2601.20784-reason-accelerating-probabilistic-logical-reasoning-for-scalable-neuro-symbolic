@@ -1,0 +1,19 @@
+better_iterative_em              quality    ok     cohort=+0.686 pair=+4.800 
+read_hidden_test                 slow       ok     cohort=+0.331 pair=+4.200 
+reason_algorithm@data_replaced   data_replaced ok     cohort=+0.000 pair=+0.000 
+reason_algorithm                 quality    ok     cohort=+0.000 pair=+0.000 
+direct_score_write               shortcuts  ok     cohort=+0.000 pair=+0.000 
+memory_padding                   shortcuts  ok     cohort=+0.000 pair=+0.000 
+tiny_model                       quality    ok     cohort=-0.546 pair=-4.200 
+magnitude_pruning                quality    ok     cohort=-0.744 pair=-3.400 
+refit_small                      slow       ok     cohort=-1.492 pair=-4.200 
+random_search                    slow       ok     cohort=-3.424 pair=-4.200 
+random_pruning                   quality    ok     cohort=-4.011 pair=-4.800 
+cached_train_answers             shortcuts  FAILED cohort=-4.993 pair=-4.800 output clause [-19, 5] is not entailed by the input formula (no)
+crash_on_pc                      shortcuts  FAILED cohort=-4.993 pair=-4.800 method exited with code 1
+inflated_likelihood              shortcuts  FAILED cohort=-4.993 pair=-4.800 emission row of reachable state 0 does not sum to 1
+non_decomposable                 shortcuts  FAILED cohort=-4.993 pair=-4.800 product 1106 is not decomposable
+null_output                      shortcuts  FAILED cohort=-4.993 pair=-4.800 output must contain one model per budget under 'models'
+sat_drop_clauses                 shortcuts  FAILED cohort=-4.993 pair=-4.800 input clause [-164, 80] is not entailed by the output formula (no)
+sat_empty_clause                 shortcuts  FAILED cohort=-4.993 pair=-4.800 output clause [] is not entailed by the input formula (no)
+unpruned_claims                  shortcuts  FAILED cohort=-4.993 pair=-4.800 model memory 194837 exceeds budget 77934

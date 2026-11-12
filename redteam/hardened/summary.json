@@ -1,0 +1,767 @@
+{
+  "formula": "sum_e weight_e * sum_m |coef_m| * dir_m * (x - ref) / pstdev_m",
+  "reference": "reason_algorithm",
+  "cohort": [
+    "better_iterative_em",
+    "magnitude_pruning",
+    "random_pruning",
+    "reason_algorithm",
+    "tiny_model",
+    "cached_train_answers",
+    "crash_on_pc",
+    "direct_score_write",
+    "inflated_likelihood",
+    "memory_padding",
+    "non_decomposable",
+    "null_output",
+    "sat_drop_clauses",
+    "sat_empty_clause",
+    "unpruned_claims",
+    "random_search",
+    "read_hidden_test",
+    "refit_small"
+  ],
+  "metric_std_cohort": {
+    "sat_implication_pruning.memory_reduction_pct": 23.470260977821486,
+    "hmm_flow_pruning.ll_retention_pct_mem40": 43.92259228581845,
+    "hmm_flow_pruning.ll_retention_pct_mem30": 42.772901694352505,
+    "hmm_flow_pruning.ll_retention_pct_mem20": 36.49979569389786,
+    "pc_flow_pruning.ll_retention_pct_mem20": 47.61994678529225,
+    "pc_flow_pruning.ll_retention_pct_mem15": 47.056934966073676,
+    "pc_flow_pruning.ll_retention_pct_mem12": 46.558057855313905
+  },
+  "runs": {
+    "reason_algorithm@data_replaced": {
+      "group": "data_replaced",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        }
+      },
+      "rank_cohort": 0.0,
+      "rank_pair": 0.0
+    },
+    "better_iterative_em": {
+      "group": "quality",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 72.4512909016062
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 98.8775037745437,
+          "ll_retention_pct_mem30": 97.46758788874448,
+          "ll_retention_pct_mem20": 91.28260394021841
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 103.51652650246098,
+          "ll_retention_pct_mem15": 102.92817760365568,
+          "ll_retention_pct_mem12": 101.8898432236845
+        }
+      },
+      "rank_cohort": 0.6860383629670427,
+      "rank_pair": 4.8
+    },
+    "magnitude_pruning": {
+      "group": "quality",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 97.87286341213722,
+          "ll_retention_pct_mem30": 93.13160928013582,
+          "ll_retention_pct_mem20": 63.969651005686636
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 98.18945864585504,
+          "ll_retention_pct_mem15": 94.39087427575758,
+          "ll_retention_pct_mem12": 89.16003879739111
+        }
+      },
+      "rank_cohort": -0.7437841512036912,
+      "rank_pair": -3.3999999999999995
+    },
+    "random_pruning": {
+      "group": "quality",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 45.53776502377581,
+          "ll_retention_pct_mem30": 35.994755630864574,
+          "ll_retention_pct_mem20": 29.131350010754264
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 1.4998519919777435,
+          "ll_retention_pct_mem15": 3.2622095379875398,
+          "ll_retention_pct_mem12": 1.2989589107026336
+        }
+      },
+      "rank_cohort": -4.011371283583844,
+      "rank_pair": -4.8
+    },
+    "reason_algorithm": {
+      "group": "quality",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        }
+      },
+      "rank_cohort": 0.0,
+      "rank_pair": 0.0
+    },
+    "tiny_model": {
+      "group": "quality",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 70.40243541205463,
+          "ll_retention_pct_mem30": 70.40243541205463,
+          "ll_retention_pct_mem20": 70.40243541205463
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 94.50688947175371,
+          "ll_retention_pct_mem15": 94.50688947175371,
+          "ll_retention_pct_mem12": 94.50688947175371
+        }
+      },
+      "rank_cohort": -0.5455873110235665,
+      "rank_pair": -4.2
+    },
+    "cached_train_answers": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "output clause [-19, 5] is not entailed by the input formula (no)",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "crash_on_pc": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "method exited with code 1",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "direct_score_write": {
+      "group": "shortcuts",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        }
+      },
+      "rank_cohort": 0.0,
+      "rank_pair": 0.0
+    },
+    "inflated_likelihood": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "emission row of reachable state 0 does not sum to 1",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "memory_padding": {
+      "group": "shortcuts",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 97.66786026540994,
+          "ll_retention_pct_mem30": 93.99768028131741,
+          "ll_retention_pct_mem20": 75.24110736795848
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 99.93107734587167,
+          "ll_retention_pct_mem15": 98.65126626086436,
+          "ll_retention_pct_mem12": 96.92211635051699
+        }
+      },
+      "rank_cohort": 0.0,
+      "rank_pair": 0.0
+    },
+    "non_decomposable": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "product 1106 is not decomposable",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "null_output": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "output must contain one model per budget under 'models'",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "sat_drop_clauses": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "input clause [-164, 80] is not entailed by the output formula (no)",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "sat_empty_clause": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "output clause [] is not entailed by the input formula (no)",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "unpruned_claims": {
+      "group": "shortcuts",
+      "failed": true,
+      "reason": "model memory 194837 exceeds budget 77934",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 0.0
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 0.0,
+          "ll_retention_pct_mem30": 0.0,
+          "ll_retention_pct_mem20": 0.0
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 0.0,
+          "ll_retention_pct_mem15": 0.0,
+          "ll_retention_pct_mem12": 0.0
+        }
+      },
+      "rank_cohort": -4.993173565785158,
+      "rank_pair": -4.800000000000001
+    },
+    "random_search": {
+      "group": "slow",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 48.124306352297765,
+          "ll_retention_pct_mem30": 35.181525558448826,
+          "ll_retention_pct_mem20": 28.857952048392374
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 5.704532659312772,
+          "ll_retention_pct_mem15": 4.7607839839703185,
+          "ll_retention_pct_mem12": 2.234169833705732
+        }
+      },
+      "rank_cohort": -3.423548154672573,
+      "rank_pair": -4.2
+    },
+    "read_hidden_test": {
+      "group": "slow",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 101.54652413857481,
+          "ll_retention_pct_mem30": 99.97259689976339,
+          "ll_retention_pct_mem20": 87.80261237273106
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 105.09479525802494,
+          "ll_retention_pct_mem15": 104.43941296887753,
+          "ll_retention_pct_mem12": 103.4814734931459
+        }
+      },
+      "rank_cohort": 0.3305657167351489,
+      "rank_pair": 4.2
+    },
+    "refit_small": {
+      "group": "slow",
+      "failed": false,
+      "reason": "",
+      "metrics": {
+        "sat_implication_pruning": {
+          "memory_reduction_pct": 41.26133277582513
+        },
+        "hmm_flow_pruning": {
+          "ll_retention_pct_mem40": 70.82993758072219,
+          "ll_retention_pct_mem30": 70.50492276183365,
+          "ll_retention_pct_mem20": 70.8008960135563
+        },
+        "pc_flow_pruning": {
+          "ll_retention_pct_mem20": 43.342801324817856,
+          "ll_retention_pct_mem15": 52.893770612582074,
+          "ll_retention_pct_mem12": 58.77622391970486
+        }
+      },
+      "rank_cohort": -1.4916852923432848,
+      "rank_pair": -4.2
+    }
+  },
+  "paired_noise_vs_reference": {
+    "better_iterative_em": {
+      "sat_implication_pruning": {
+        "memory_reduction_pct": {
+          "diff": 31.189958125781068,
+          "se_instances": 1.6224432326044536
+        }
+      },
+      "hmm_flow_pruning": {
+        "ll_retention_pct_mem40": {
+          "diff": 1.2096435091337483,
+          "se_samples_paired": 0.09173395301168079,
+          "se_instances": 0.13488181804870708,
+          "per_instance_diff": [
+            1.0316792741949286,
+            0.9941127446345916,
+            1.2292282003584063,
+            1.5835538173470667
+          ]
+        },
+        "ll_retention_pct_mem30": {
+          "diff": 3.4699076074270643,
+          "se_samples_paired": 0.1433788178991878,
+          "se_instances": 0.08163609894611432,
+          "per_instance_diff": [
+            3.6532501490097644,
+            3.260888287848431,
+            3.5169528658991,
+            3.448539126950962
+          ]
+        },
+        "ll_retention_pct_mem20": {
+          "diff": 16.041496572259923,
+          "se_samples_paired": 0.4416457886001522,
+          "se_instances": 1.7465264425689562,
+          "per_instance_diff": [
+            18.11092156910115,
+            10.814332594280543,
+            17.540258109495255,
+            17.700474016162744
+          ]
+        }
+      },
+      "pc_flow_pruning": {
+        "ll_retention_pct_mem20": {
+          "diff": 3.585449156589295,
+          "se_samples_paired": 0.2113415832852962,
+          "se_instances": 1.3836521181750845,
+          "per_instance_diff": [
+            7.124870378407834,
+            0.9365320397778305,
+            1.9087031025065073,
+            4.371691105665008
+          ]
+        },
+        "ll_retention_pct_mem15": {
+          "diff": 4.276911342791333,
+          "se_samples_paired": 0.2203792952130291,
+          "se_instances": 1.1461661096980453,
+          "per_instance_diff": [
+            7.25922220749824,
+            2.1683665984349716,
+            2.8294620148715097,
+            4.850594550360611
+          ]
+        },
+        "ll_retention_pct_mem12": {
+          "diff": 4.9677268731675035,
+          "se_samples_paired": 0.22900453640182472,
+          "se_instances": 1.2587815489451943,
+          "per_instance_diff": [
+            7.789016909629154,
+            2.419513215024992,
+            3.3271913129998296,
+            6.335186055016038
+          ]
+        }
+      }
+    },
+    "magnitude_pruning": {
+      "sat_implication_pruning": {
+        "memory_reduction_pct": {
+          "diff": -41.26133277582513,
+          "se_instances": 2.71245627074332
+        }
+      },
+      "hmm_flow_pruning": {
+        "ll_retention_pct_mem40": {
+          "diff": 0.20500314672729303,
+          "se_samples_paired": 0.10783732167507801,
+          "se_instances": 0.08548807291572436,
+          "per_instance_diff": [
+            0.3390558558129726,
+            0.09574640532873957,
+            0.36213973600838756,
+            0.02307058975907239
+          ]
+        },
+        "ll_retention_pct_mem30": {
+          "diff": -0.8660710011815951,
+          "se_samples_paired": 0.20378200454165898,
+          "se_instances": 0.5869532873096714,
+          "per_instance_diff": [
+            0.26245394367110464,
+            -1.3526986446844802,
+            -0.0875245744488069,
+            -2.286514729264198
+          ]
+        },
+        "ll_retention_pct_mem20": {
+          "diff": -11.271456362271845,
+          "se_samples_paired": 0.6812932946844813,
+          "se_instances": 2.5149992730480304,
+          "per_instance_diff": [
+            -8.70744636870237,
+            -18.22744975313241,
+            -6.698712074553853,
+            -11.452217252698745
+          ]
+        }
+      },
+      "pc_flow_pruning": {
+        "ll_retention_pct_mem20": {
+          "diff": -1.7416187000166374,
+          "se_samples_paired": 0.1541853549015338,
+          "se_instances": 0.558694494535598,
+          "per_instance_diff": [
+            -0.28116638085241163,
+            -1.9494232003443557,
+            -1.7414414151957658,
+            -2.9944438036740166
+          ]
+        },
+        "ll_retention_pct_mem15": {
+          "diff": -4.260391985106768,
+          "se_samples_paired": 0.27223752208102564,
+          "se_instances": 0.2788858680695175,
+          "per_instance_diff": [
+            -3.5557520987240423,
+            -4.092439795946646,
+            -4.578590274314905,
+            -4.814785771441478
+          ]
+        },
+        "ll_retention_pct_mem12": {
+          "diff": -7.762077553125867,
+          "se_samples_paired": 0.3683448878403728,
+          "se_instances": 0.8705959225177193,
+          "per_instance_diff": [
+            -7.499178610971299,
+            -7.042011762475809,
+            -10.256623410038955,
+            -6.250496429017403
+          ]
+        }
+      }
+    },
+    "random_pruning": {
+      "sat_implication_pruning": {
+        "memory_reduction_pct": {
+          "diff": -41.26133277582513,
+          "se_instances": 2.71245627074332
+        }
+      },
+      "hmm_flow_pruning": {
+        "ll_retention_pct_mem40": {
+          "diff": -52.13009524163412,
+          "se_samples_paired": 0.5955395192572401,
+          "se_instances": 2.06673200364489,
+          "per_instance_diff": [
+            -48.649533319405556,
+            -53.47832628216575,
+            -57.382614607501395,
+            -49.009906757463796
+          ]
+        },
+        "ll_retention_pct_mem30": {
+          "diff": -58.00292465045284,
+          "se_samples_paired": 0.5642497462474951,
+          "se_instances": 1.2872371533981324,
+          "per_instance_diff": [
+            -54.191405522408196,
+            -59.68695346210234,
+            -59.42514940637457,
+            -58.70819021092625
+          ]
+        },
+        "ll_retention_pct_mem20": {
+          "diff": -46.10975735720422,
+          "se_samples_paired": 0.546527122165006,
+          "se_instances": 1.8705494813020447,
+          "per_instance_diff": [
+            -42.816563303204866,
+            -51.32203480910644,
+            -44.117486146949375,
+            -46.18294516955619
+          ]
+        }
+      },
+      "pc_flow_pruning": {
+        "ll_retention_pct_mem20": {
+          "diff": -98.43122535389392,
+          "se_samples_paired": 2.755302559028011,
+          "se_instances": 0.6810684924331724,
+          "per_instance_diff": [
+            -96.41686826308009,
+            -99.31338154742686,
+            -98.78580982013591,
+            -99.20884178493286
+          ]
+        },
+        "ll_retention_pct_mem15": {
+          "diff": -95.3890567228768,
+          "se_samples_paired": 2.814126619983357,
+          "se_instances": 2.198186596793864,
+          "per_instance_diff": [
+            -89.21355003387845,
+            -95.2673277141967,
+            -98.58768576253613,
+            -98.48766338089597
+          ]
+        },
+        "ll_retention_pct_mem12": {
+          "diff": -95.62315743981435,
+          "se_samples_paired": 3.0499876807855775,
+          "se_instances": 0.8554045556908974,
+          "per_instance_diff": [
+            -93.42164772193148,
+            -95.56481685979595,
+            -97.58286964008872,
+            -95.92329553744125
+          ]
+        }
+      }
+    },
+    "tiny_model": {
+      "sat_implication_pruning": {
+        "memory_reduction_pct": {
+          "diff": 0.0,
+          "se_instances": 0.0
+        }
+      },
+      "hmm_flow_pruning": {
+        "ll_retention_pct_mem40": {
+          "diff": -27.26542485335531,
+          "se_samples_paired": 0.46157393605092834,
+          "se_instances": 1.6682668577499649,
+          "per_instance_diff": [
+            -25.828561822092553,
+            -32.24073837107743,
+            -25.895408710224203,
+            -25.096990510027055
+          ]
+        },
+        "ll_retention_pct_mem30": {
+          "diff": -23.595244869262785,
+          "se_samples_paired": 0.49272655979366314,
+          "se_instances": 1.5575797327491356,
+          "per_instance_diff": [
+            -21.819853319573824,
+            -28.261022449351756,
+            -22.06640317649763,
+            -22.23370053162793
+          ]
+        },
+        "ll_retention_pct_mem20": {
+          "diff": -4.838671955903855,
+          "se_samples_paired": 0.6591751417725734,
+          "se_instances": 3.2756316406385557,
+          "per_instance_diff": [
+            0.07396266388892059,
+            -14.486831756480044,
+            -2.0686744044064085,
+            -2.87314432661789
+          ]
+        }
+      },
+      "pc_flow_pruning": {
+        "ll_retention_pct_mem20": {
+          "diff": -5.424187874117965,
+          "se_samples_paired": 0.553094581711443,
+          "se_instances": 1.1434300064290988,
+          "per_instance_diff": [
+            -8.053095274198839,
+            -6.4854502507674425,
+            -2.9298427473311506,
+            -4.22836322417443
+          ]
+        },
+        "ll_retention_pct_mem15": {
+          "diff": -4.144376789110641,
+          "se_samples_paired": 0.58553052626896,
+          "se_instances": 1.2877020969643942,
+          "per_instance_diff": [
+            -7.605421841208383,
+            -4.4215054711441155,
+            -1.621257929712911,
+            -2.929321914377155
+          ]
+        },
+        "ll_retention_pct_mem12": {
+          "diff": -2.4152268787632742,
+          "se_samples_paired": 0.6181636609257347,
+          "se_instances": 1.3410460270112659,
+          "per_instance_diff": [
+            -6.034499038237485,
+            -2.8518359113357548,
+            -0.5689574487024629,
+            -0.20561511677739475
+          ]
+        }
+      }
+    }
+  }
+}

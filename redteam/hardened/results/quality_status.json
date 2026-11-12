@@ -1,0 +1,16 @@
+{
+  "group": "quality",
+  "methods": [
+    "reason_algorithm",
+    "magnitude_pruning",
+    "better_iterative_em",
+    "random_pruning",
+    "tiny_model"
+  ],
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "arguments": [],
+  "test_exit": 0,
+  "test_seconds": 98.1,
+  "train_exit": 0,
+  "train_seconds": 101.9
+}
