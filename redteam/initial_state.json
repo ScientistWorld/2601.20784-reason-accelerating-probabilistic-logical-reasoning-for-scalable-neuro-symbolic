@@ -1,0 +1,5 @@
+{
+  "head": "2cb02535ee62afe4150617481bd210170c6e4b99",
+  "status": " M README.md\n M manifest.json\n D trajectory/turn_0001_raw.jsonl\n D trajectory/turn_0002_raw.jsonl\n D trajectory/turn_0003_raw.jsonl\n D trajectory/turn_0004_raw.jsonl\n?? redteam/\n",
+  "note": "README.md and manifest.json are pre-existing masked device files; trajectory deletions are pre-existing. Do not alter these."
+}

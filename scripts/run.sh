@@ -15,7 +15,4 @@ cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 PYTHON_BIN="${PYTHON:-python3}"
 
-bash scripts/reproduce.sh
-bash scripts/evaluate_train.sh
-bash scripts/evaluate_test.sh
-"$PYTHON_BIN" validate.py --compare
+bash redteam/run_all.sh
