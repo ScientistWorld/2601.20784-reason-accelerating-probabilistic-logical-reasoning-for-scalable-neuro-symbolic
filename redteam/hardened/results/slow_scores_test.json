@@ -6,6 +6,9 @@
         "random_search": {
           "memory_reduction_pct": 41.26133277582513
         },
+        "read_hidden_generator": {
+          "memory_reduction_pct": 41.26133277582513
+        },
         "read_hidden_test": {
           "memory_reduction_pct": 41.26133277582513
         },
@@ -18,13 +21,18 @@
       "results": {
         "random_search": {
           "ll_retention_pct_mem40": 48.124306352297765,
-          "ll_retention_pct_mem30": 35.181525558448826,
+          "ll_retention_pct_mem30": 35.18152555844883,
           "ll_retention_pct_mem20": 28.857952048392374
         },
-        "read_hidden_test": {
-          "ll_retention_pct_mem40": 101.54652413857481,
+        "read_hidden_generator": {
+          "ll_retention_pct_mem40": 101.5465241385748,
           "ll_retention_pct_mem30": 99.97259689976339,
           "ll_retention_pct_mem20": 87.80261237273106
+        },
+        "read_hidden_test": {
+          "ll_retention_pct_mem40": 97.66786026540993,
+          "ll_retention_pct_mem30": 93.9976802813174,
+          "ll_retention_pct_mem20": 75.24110736795849
         },
         "refit_small": {
           "ll_retention_pct_mem40": 70.82993758072219,
@@ -36,17 +44,22 @@
     "pc_flow_pruning": {
       "results": {
         "random_search": {
-          "ll_retention_pct_mem20": 5.704532659312772,
-          "ll_retention_pct_mem15": 4.7607839839703185,
-          "ll_retention_pct_mem12": 2.234169833705732
+          "ll_retention_pct_mem20": 5.7045326593127745,
+          "ll_retention_pct_mem15": 4.760783983970317,
+          "ll_retention_pct_mem12": 2.234169833705734
+        },
+        "read_hidden_generator": {
+          "ll_retention_pct_mem20": 105.09479525802494,
+          "ll_retention_pct_mem15": 104.43941296887755,
+          "ll_retention_pct_mem12": 103.48147349314593
         },
         "read_hidden_test": {
-          "ll_retention_pct_mem20": 105.09479525802494,
-          "ll_retention_pct_mem15": 104.43941296887753,
-          "ll_retention_pct_mem12": 103.4814734931459
+          "ll_retention_pct_mem20": 99.93107734587171,
+          "ll_retention_pct_mem15": 98.65126626086439,
+          "ll_retention_pct_mem12": 96.92211635051702
         },
         "refit_small": {
-          "ll_retention_pct_mem20": 43.342801324817856,
+          "ll_retention_pct_mem20": 43.34280132481787,
           "ll_retention_pct_mem15": 52.893770612582074,
           "ll_retention_pct_mem12": 58.77622391970486
         }
@@ -56,6 +69,11 @@
   "_status": {
     "random_search": {
       "manifest": "checkpoints/random_search.json",
+      "failed": false,
+      "reason": ""
+    },
+    "read_hidden_generator": {
+      "manifest": "checkpoints/read_hidden_generator.json",
       "failed": false,
       "reason": ""
     },

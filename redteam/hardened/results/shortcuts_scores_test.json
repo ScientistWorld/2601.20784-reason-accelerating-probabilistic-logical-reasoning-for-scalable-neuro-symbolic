@@ -48,9 +48,9 @@
           "ll_retention_pct_mem20": 0.0
         },
         "direct_score_write": {
-          "ll_retention_pct_mem40": 97.66786026540994,
-          "ll_retention_pct_mem30": 93.99768028131741,
-          "ll_retention_pct_mem20": 75.24110736795848
+          "ll_retention_pct_mem40": 97.66786026540993,
+          "ll_retention_pct_mem30": 93.9976802813174,
+          "ll_retention_pct_mem20": 75.24110736795849
         },
         "inflated_likelihood": {
           "ll_retention_pct_mem40": 0.0,
@@ -58,9 +58,9 @@
           "ll_retention_pct_mem20": 0.0
         },
         "memory_padding": {
-          "ll_retention_pct_mem40": 97.66786026540994,
-          "ll_retention_pct_mem30": 93.99768028131741,
-          "ll_retention_pct_mem20": 75.24110736795848
+          "ll_retention_pct_mem40": 97.66786026540993,
+          "ll_retention_pct_mem30": 93.9976802813174,
+          "ll_retention_pct_mem20": 75.24110736795849
         },
         "non_decomposable": {
           "ll_retention_pct_mem40": 0.0,
@@ -102,9 +102,9 @@
           "ll_retention_pct_mem12": 0.0
         },
         "direct_score_write": {
-          "ll_retention_pct_mem20": 99.93107734587167,
-          "ll_retention_pct_mem15": 98.65126626086436,
-          "ll_retention_pct_mem12": 96.92211635051699
+          "ll_retention_pct_mem20": 99.93107734587171,
+          "ll_retention_pct_mem15": 98.65126626086439,
+          "ll_retention_pct_mem12": 96.92211635051702
         },
         "inflated_likelihood": {
           "ll_retention_pct_mem20": 0.0,
@@ -112,9 +112,9 @@
           "ll_retention_pct_mem12": 0.0
         },
         "memory_padding": {
-          "ll_retention_pct_mem20": 99.93107734587167,
-          "ll_retention_pct_mem15": 98.65126626086436,
-          "ll_retention_pct_mem12": 96.92211635051699
+          "ll_retention_pct_mem20": 99.93107734587171,
+          "ll_retention_pct_mem15": 98.65126626086439,
+          "ll_retention_pct_mem12": 96.92211635051702
         },
         "non_decomposable": {
           "ll_retention_pct_mem20": 0.0,

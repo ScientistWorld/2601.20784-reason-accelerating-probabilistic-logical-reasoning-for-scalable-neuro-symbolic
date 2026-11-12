@@ -10,7 +10,7 @@
   "hidden_command": "bash scripts/evaluate_test.sh",
   "arguments": [],
   "test_exit": 0,
-  "test_seconds": 98.1,
+  "test_seconds": 90.6,
   "train_exit": 0,
-  "train_seconds": 101.9
+  "train_seconds": 95.1
 }

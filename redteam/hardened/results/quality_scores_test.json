@@ -24,7 +24,7 @@
       "results": {
         "better_iterative_em": {
           "ll_retention_pct_mem40": 98.8775037745437,
-          "ll_retention_pct_mem30": 97.46758788874448,
+          "ll_retention_pct_mem30": 97.46758788874446,
           "ll_retention_pct_mem20": 91.28260394021841
         },
         "magnitude_pruning": {
@@ -33,19 +33,19 @@
           "ll_retention_pct_mem20": 63.969651005686636
         },
         "random_pruning": {
-          "ll_retention_pct_mem40": 45.53776502377581,
-          "ll_retention_pct_mem30": 35.994755630864574,
+          "ll_retention_pct_mem40": 45.53776502377582,
+          "ll_retention_pct_mem30": 35.99475563086457,
           "ll_retention_pct_mem20": 29.131350010754264
         },
         "reason_algorithm": {
-          "ll_retention_pct_mem40": 97.66786026540994,
-          "ll_retention_pct_mem30": 93.99768028131741,
-          "ll_retention_pct_mem20": 75.24110736795848
+          "ll_retention_pct_mem40": 97.66786026540993,
+          "ll_retention_pct_mem30": 93.9976802813174,
+          "ll_retention_pct_mem20": 75.24110736795849
         },
         "tiny_model": {
-          "ll_retention_pct_mem40": 70.40243541205463,
-          "ll_retention_pct_mem30": 70.40243541205463,
-          "ll_retention_pct_mem20": 70.40243541205463
+          "ll_retention_pct_mem40": 70.40243541205461,
+          "ll_retention_pct_mem30": 70.40243541205461,
+          "ll_retention_pct_mem20": 70.40243541205461
         }
       }
     },
@@ -53,28 +53,28 @@
       "results": {
         "better_iterative_em": {
           "ll_retention_pct_mem20": 103.51652650246098,
-          "ll_retention_pct_mem15": 102.92817760365568,
+          "ll_retention_pct_mem15": 102.9281776036557,
           "ll_retention_pct_mem12": 101.8898432236845
         },
         "magnitude_pruning": {
-          "ll_retention_pct_mem20": 98.18945864585504,
-          "ll_retention_pct_mem15": 94.39087427575758,
-          "ll_retention_pct_mem12": 89.16003879739111
+          "ll_retention_pct_mem20": 98.18945864585508,
+          "ll_retention_pct_mem15": 94.39087427575761,
+          "ll_retention_pct_mem12": 89.16003879739117
         },
         "random_pruning": {
-          "ll_retention_pct_mem20": 1.4998519919777435,
-          "ll_retention_pct_mem15": 3.2622095379875398,
+          "ll_retention_pct_mem20": 1.4998519919777444,
+          "ll_retention_pct_mem15": 3.26220953798754,
           "ll_retention_pct_mem12": 1.2989589107026336
         },
         "reason_algorithm": {
-          "ll_retention_pct_mem20": 99.93107734587167,
-          "ll_retention_pct_mem15": 98.65126626086436,
-          "ll_retention_pct_mem12": 96.92211635051699
+          "ll_retention_pct_mem20": 99.93107734587171,
+          "ll_retention_pct_mem15": 98.65126626086439,
+          "ll_retention_pct_mem12": 96.92211635051702
         },
         "tiny_model": {
-          "ll_retention_pct_mem20": 94.50688947175371,
-          "ll_retention_pct_mem15": 94.50688947175371,
-          "ll_retention_pct_mem12": 94.50688947175371
+          "ll_retention_pct_mem20": 94.50688947175374,
+          "ll_retention_pct_mem15": 94.50688947175374,
+          "ll_retention_pct_mem12": 94.50688947175374
         }
       }
     }
