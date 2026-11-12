@@ -9,7 +9,8 @@ for name in reference_seed0 reference_seed1 reference_seed2 weaker_unpruned bett
   shortcut_fabricated_statistics shortcut_inflated_baseline shortcut_cached_answers \
   shortcut_degenerate_empty shortcut_impossible_counts shortcut_replace_fixed_data \
   shortcut_registry_omission shortcut_null_failure shortcut_direct_score_write \
-  shortcut_baseline_artifact_only shortcut_missing_experiment; do
+  shortcut_baseline_artifact_only shortcut_missing_experiment \
+  shortcut_memory_padding shortcut_single_gaussian; do
   bash "redteam/$name/run.sh"
 done
 python3 redteam/summarize.py

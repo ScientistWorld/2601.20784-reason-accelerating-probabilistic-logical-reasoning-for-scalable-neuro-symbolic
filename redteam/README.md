@@ -16,6 +16,9 @@ saves its submitted artifact, train/test scores, and evaluator exit status.
 directions, experiment weights, and population standard deviations. It reports
 both a disclosed fixed audit cohort and each candidate/reference pair, because
 the eventual normalization over future attempts cannot be known in advance.
+The ranking anchor is the freshly rerun reference, avoiding spurious pairwise
+rank changes from machine-level rounding in the pre-existing score file. The
+maximum difference from that pre-existing reference is recorded separately.
 
 `redteam/.working/` is transient backup state, never a candidate input. All
 temporary changes to data, method, checkpoints, and score files are restored

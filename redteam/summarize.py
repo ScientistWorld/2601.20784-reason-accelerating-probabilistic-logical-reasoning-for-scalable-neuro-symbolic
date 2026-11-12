@@ -13,7 +13,8 @@ def extract(payload, method='audit_candidate'):
     return {exp: item.get('results',{}).get(method,{})
             for exp,item in payload.get('experiments',{}).items()}
 
-reference = extract(original, 'reason_algorithm')
+stored_reference = extract(original, 'reason_algorithm')
+reference = extract(json.loads((redteam/'reference_seed0/scores_test.json').read_text()))
 attempts = {}
 statuses = {}
 for path in sorted(redteam.glob('*/status.json')):
@@ -58,7 +59,7 @@ quality_names = ['reference_seed0','better_exact_merge','weaker_unpruned']
 quality_sd = deviations([attempts[n] for n in quality_names if n in attempts])
 out = dict(normalization='population standard deviation across one candidate per named audit case; ref seed0 included, ref seeds1/2 and data-seed sensitivity excluded',
            formula='sum(weight * abs(coefficient) * direction * (candidate-reference) / std); absent values skipped',
-           reference_method='reason_algorithm in original_test_scores.json',
+           reference_method='audit_candidate in freshly rerun reference_seed0/scores_test.json',
            audit_cohort=audit_names, metric_std=sd, reference_metrics=reference,
            cases={}, quality_ranks={})
 for name in statuses:
@@ -87,6 +88,9 @@ for exp in config:
         out['seed_spread'][exp][metric] = dict(min=min(vals),max=max(vals),range=max(vals)-min(vals))
 seed_ranks = [rank(attempts[n],sd)[0] for n in seed_names if n in attempts]
 out['seed_rank_range'] = max(seed_ranks)-min(seed_ranks)
+out['stored_reference_max_abs_float_drift'] = max(
+    abs(value-stored_reference[exp][metric])
+    for exp, metrics in reference.items() for metric,value in metrics.items())
 out['missing_configured_metrics'] = {
     exp:[m for m,mc in ec['metrics'].items() if mc['coefficient'] and m not in reference.get(exp,{})]
     for exp,ec in config.items()}

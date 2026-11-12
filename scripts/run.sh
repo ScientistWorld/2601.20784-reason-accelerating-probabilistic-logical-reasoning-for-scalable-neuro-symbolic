@@ -15,4 +15,4 @@ cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
 PYTHON_BIN="${PYTHON:-python3}"
 
-bash redteam/run_all.sh
+bash redteam/run_followup.sh
