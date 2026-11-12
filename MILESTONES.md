@@ -28,5 +28,9 @@
 - Strengthened scoring after a sub-agent audit: final regularized DAG compression is now measured against an unpruned baseline after the same two-input regularization step.
 - SAT pruning artifacts now include an implication-reachability proof check for removed literals, in addition to satisfiability preservation.
 
+### [2026-11-12 18:30] - core_claim
+- Hardening (iteration 11) responding to REDTEAM.md: methods are now procedures run on hidden instances; the evaluator validates returned models itself and scores them under fixed memory budgets with exact SAT equivalence. Any failure receives the worst values. See HARDENING.md.
+- Audit jobs `3b7af4eb-e27` and `58503c26-32d` covered 20 cases. Every cheating shortcut fails or at best ties the reference. The genuine improvement scores +0.69, and the baseline and weaker variants rank below the reference. The held-out file leak is fixed: instances are now built in memory, and the blind answer-key scan ties the reference.
+
 ## Stop Justification
 - Completed at milestone `core_claim`.

@@ -3,105 +3,51 @@
   "experiments": {
     "sat_implication_pruning": {
       "results": {
-        "better_iterative_em": {
-          "memory_reduction_pct": 70.64538103145986
-        },
         "magnitude_pruning": {
           "memory_reduction_pct": 0.0
         },
-        "random_pruning": {
-          "memory_reduction_pct": 0.0
-        },
         "reason_algorithm": {
-          "memory_reduction_pct": 36.76851762732664
-        },
-        "tiny_model": {
           "memory_reduction_pct": 36.76851762732664
         }
       }
     },
     "hmm_flow_pruning": {
       "results": {
-        "better_iterative_em": {
-          "ll_retention_pct_mem40": 98.86858348022994,
-          "ll_retention_pct_mem30": 97.25419750793078,
-          "ll_retention_pct_mem20": 91.5489387259558
-        },
         "magnitude_pruning": {
           "ll_retention_pct_mem40": 97.77862914382172,
           "ll_retention_pct_mem30": 93.01620026801046,
           "ll_retention_pct_mem20": 63.92143738443414
         },
-        "random_pruning": {
-          "ll_retention_pct_mem40": 42.78549851427545,
-          "ll_retention_pct_mem30": 32.913959629508064,
-          "ll_retention_pct_mem20": 28.948871948271062
-        },
         "reason_algorithm": {
           "ll_retention_pct_mem40": 97.54946728954728,
           "ll_retention_pct_mem30": 93.6820059755859,
           "ll_retention_pct_mem20": 76.42838616613071
-        },
-        "tiny_model": {
-          "ll_retention_pct_mem40": 69.01955542649388,
-          "ll_retention_pct_mem30": 69.01955542649388,
-          "ll_retention_pct_mem20": 69.01955542649388
         }
       }
     },
     "pc_flow_pruning": {
       "results": {
-        "better_iterative_em": {
-          "ll_retention_pct_mem20": 105.04700438872969,
-          "ll_retention_pct_mem15": 104.30576382338432,
-          "ll_retention_pct_mem12": 102.83441755329241
-        },
         "magnitude_pruning": {
           "ll_retention_pct_mem20": 98.42002760694112,
           "ll_retention_pct_mem15": 93.92824779929487,
           "ll_retention_pct_mem12": 86.20207401579844
         },
-        "random_pruning": {
-          "ll_retention_pct_mem20": 2.043326030948687,
-          "ll_retention_pct_mem15": 1.3987759189770457,
-          "ll_retention_pct_mem12": 1.5552998766358956
-        },
         "reason_algorithm": {
           "ll_retention_pct_mem20": 99.7780732589948,
           "ll_retention_pct_mem15": 98.33140766239336,
           "ll_retention_pct_mem12": 95.41499576073085
-        },
-        "tiny_model": {
-          "ll_retention_pct_mem20": 91.56954626021044,
-          "ll_retention_pct_mem15": 91.56954626021044,
-          "ll_retention_pct_mem12": 91.56954626021044
         }
       }
     }
   },
   "_status": {
-    "better_iterative_em": {
-      "manifest": "checkpoints/better_iterative_em.json",
-      "failed": false,
-      "reason": ""
-    },
     "magnitude_pruning": {
       "manifest": "checkpoints/magnitude_pruning.json",
       "failed": false,
       "reason": ""
     },
-    "random_pruning": {
-      "manifest": "checkpoints/random_pruning.json",
-      "failed": false,
-      "reason": ""
-    },
     "reason_algorithm": {
       "manifest": "checkpoints/reason_algorithm.json",
-      "failed": false,
-      "reason": ""
-    },
-    "tiny_model": {
-      "manifest": "checkpoints/tiny_model.json",
       "failed": false,
       "reason": ""
     }

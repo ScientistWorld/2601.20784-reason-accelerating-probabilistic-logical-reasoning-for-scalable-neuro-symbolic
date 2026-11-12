@@ -3,10 +3,20 @@
 # (variants and shortcuts through the real no-argument hidden test).
 # CPU only.  Each stage saves its outputs before the next starts.
 
-set -e
+set -eo pipefail
 cd /home/user
 export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-mkdir -p redteam/hardened/results
+mkdir -p redteam/hardened/results redteam/hardened/work
+DATA_BACKUP=redteam/hardened/work/reason_benchmarks.backup.json
+
+# 0. Self-heal.  The scheduler may kill and restart this job (job 58503c26-32d
+#    did); a killed audit step cannot run its restore, so undo anything an
+#    earlier attempt may have left: corrupted public data, audit manifests.
+if [ -f "$DATA_BACKUP" ]; then
+  echo "restoring public data left corrupted by an interrupted attempt"
+  cp "$DATA_BACKUP" data/reason_benchmarks.json && rm -f "$DATA_BACKUP"
+fi
+rm -f checkpoints/*.json   # reproduce.sh re-registers the two official manifests
 
 # 1. Reference reproduction (official scores: reference + baseline only)
 bash scripts/reproduce.sh 2>&1 | tee redteam/hardened/results/reproduce.log
@@ -29,7 +39,7 @@ print("non-code files under eval/ containing held-out samples:", hits or "none")
 PY
 
 # 3. Hidden test does not read data/: corrupt the public data file, rerun the reference
-cp data/reason_benchmarks.json /tmp/reason_benchmarks.backup.json
+cp data/reason_benchmarks.json "$DATA_BACKUP"   # in the workspace, so a restart can restore it
 python3 - <<'PY'
 import json
 p = "data/reason_benchmarks.json"
@@ -45,7 +55,8 @@ PY
 set +e
 $H data_replaced reason_algorithm
 set -e
-cp /tmp/reason_benchmarks.backup.json data/reason_benchmarks.json
+cp "$DATA_BACKUP" data/reason_benchmarks.json && rm -f "$DATA_BACKUP"
 
 python3 redteam/hardened/summarize.py | tee redteam/hardened/results/summary.txt
+ls checkpoints | tee redteam/hardened/results/final_checkpoints.txt   # must be the two official manifests
 python3 validate.py
