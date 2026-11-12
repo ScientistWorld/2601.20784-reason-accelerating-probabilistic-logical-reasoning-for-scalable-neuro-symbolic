@@ -14,10 +14,13 @@ A run that crashes, times out, returns a malformed / invalid / non-equivalent
 model or exceeds a memory budget is *failed*: it receives the worst value of
 every scored metric in every experiment.
 
-This slice scores hidden instances (eval/test/hidden_instances.json, produced
-by eval/test/hidden_generator.py) against their hidden held-out samples.  It
-never reads data/ or scoring/ and never retrains anything: it runs each
-registered procedure once per hidden instance and scores the returned models.
+This slice scores hidden instances against their hidden held-out samples.  The
+instances are regenerated *in memory* by eval/test/hidden_generator.py (secret
+seeds, bit-for-bit deterministic) before any method is started; no file on
+disk holds the held-out samples, so a procedure cannot read them while it
+runs.  It never reads data/ or scoring/ and never retrains anything: it runs
+each registered procedure once per hidden instance and scores the returned
+models.
 """
 
 from __future__ import annotations
@@ -38,8 +41,9 @@ from test_kernels import (  # noqa: E402
     pc_loglik, pc_memory, pc_validate, score_sat,
 )
 
+import hidden_generator  # noqa: E402  (imported before any method runs)
+
 ROOT = Path(__file__).resolve().parents[2]
-INSTANCES = Path(__file__).resolve().parent / "hidden_instances.json"
 SLICE = "test"
 
 EXPERIMENTS = {
@@ -221,13 +225,16 @@ def main() -> None:
     parser.add_argument("--out", default=str(ROOT / "scoring" / "scores_test.json"))
     parser.add_argument("--details-out", default=None, help="optional per-instance/per-sample record")
     parser.add_argument("--log", default=None)
-    parser.add_argument("--instances", default=str(INSTANCES), help=argparse.SUPPRESS)
+    parser.add_argument("--instances", default=None, help=argparse.SUPPRESS)  # debugging only
     args = parser.parse_args()
 
     methods = discover_methods(Path(args.methods_dir))
     if not methods:
         raise SystemExit(f"no method manifests (with a 'command' list) in {args.methods_dir}")
-    instances = json.loads(Path(args.instances).read_text(encoding="utf-8"))
+    if args.instances:
+        instances = json.loads(Path(args.instances).read_text(encoding="utf-8"))
+    else:
+        instances = hidden_generator.build(hidden_generator.HIDDEN_SEEDS)
     prepared = prepare(instances)
     log = open(args.log, "w", encoding="utf-8") if args.log else None
 

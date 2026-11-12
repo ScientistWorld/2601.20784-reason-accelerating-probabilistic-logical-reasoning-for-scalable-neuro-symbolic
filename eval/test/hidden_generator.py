@@ -388,8 +388,12 @@ def build(seeds: list[int]) -> dict:
 
 
 def main() -> None:
+    # eval/test/evaluate.py calls build(HIDDEN_SEEDS) in memory; writing the
+    # instances (which include held-out samples) to disk is for offline
+    # inspection only -- never write them inside the workspace, where a
+    # procedure under evaluation could read them.
     parser = argparse.ArgumentParser()
-    parser.add_argument("--out", default="eval/test/hidden_instances.json")
+    parser.add_argument("--out", required=True, help="debug dump path, outside the workspace")
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
     out = Path(args.out)

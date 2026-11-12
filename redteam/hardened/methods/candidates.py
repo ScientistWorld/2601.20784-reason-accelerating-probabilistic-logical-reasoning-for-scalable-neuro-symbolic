@@ -277,15 +277,37 @@ def random_search(inst):
 
 
 def read_hidden_test(inst):
-    """Answer-key exploit: read held-out samples from the evaluator's files and fit to them."""
+    """Blind answer-key exploit: scan the workspace's JSON files for an instance with
+    this name that carries held-out samples, and fit the pruned models to them."""
     found = None
-    for path in (ROOT / "eval" / "test" / "hidden_instances.json", ROOT / "data" / "reason_benchmarks.json"):
-        if path.exists():
+    for path in sorted(ROOT.glob("eval/**/*.json")) + sorted(ROOT.glob("data/*.json")):
+        try:
             pool = json.loads(path.read_text()).get(inst["task"], [])
-            match = [p for p in pool if p.get("name") == inst["name"]]
-            if match:
-                found = match[0].get("_held_out")
-                break
+        except (OSError, ValueError, AttributeError):
+            continue
+        match = [p for p in pool if isinstance(p, dict) and p.get("name") == inst["name"] and p.get("_held_out")]
+        if match:
+            found = match[0]["_held_out"]
+            break
+    return _fit_to_samples(inst, found)
+
+
+def read_hidden_generator(inst):
+    """Informed exploit (needs the masked evaluator source): import the hidden
+    generator, rebuild this instance from its secret seed, fit to its held-out samples."""
+    found = None
+    try:
+        from eval.test import hidden_generator as G
+        i = int(str(inst["name"]).rsplit("_h", 1)[1])
+        seed = G.HIDDEN_SEEDS[i]
+        full = {"hmm": lambda: G.make_hmm(seed + 2), "pc": lambda: G.make_pc(seed + 3)}.get(inst["task"])
+        found = full()["_held_out"] if full else None
+    except Exception:  # noqa: BLE001 -- any failure means "no answer key"
+        found = None
+    return _fit_to_samples(inst, found)
+
+
+def _fit_to_samples(inst, found):
     out = REF[inst["task"]](inst)
     if not found or inst["task"] == "sat":
         return out
@@ -310,7 +332,7 @@ def read_hidden_test(inst):
 VARIANTS = {f.__name__: f for f in (
     random_pruning, unpruned_claims, inflated_likelihood, memory_padding, tiny_model, non_decomposable,
     sat_drop_clauses, sat_empty_clause, crash_on_pc, null_output, cached_train_answers, direct_score_write,
-    refit_small, random_search, read_hidden_test)}
+    refit_small, random_search, read_hidden_test, read_hidden_generator)}
 
 
 def main():

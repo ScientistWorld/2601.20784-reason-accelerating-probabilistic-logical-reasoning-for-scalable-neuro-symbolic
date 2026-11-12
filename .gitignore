@@ -237,3 +237,6 @@ core.[0-9]*
 
 # hardening audit scratch
 redteam/hardened/work/
+
+# hidden test instances are regenerated in memory; never store a dump in the workspace
+eval/test/hidden_instances*.json

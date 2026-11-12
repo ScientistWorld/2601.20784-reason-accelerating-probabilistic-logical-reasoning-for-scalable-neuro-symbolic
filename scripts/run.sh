@@ -16,7 +16,17 @@ H="python3 redteam/hardened/harness.py"
 $H quality reason_algorithm magnitude_pruning better_iterative_em random_pruning tiny_model --train
 $H shortcuts unpruned_claims inflated_likelihood memory_padding non_decomposable sat_drop_clauses \
    sat_empty_clause crash_on_pc null_output cached_train_answers direct_score_write
-$H slow refit_small random_search read_hidden_test
+$H slow refit_small random_search read_hidden_test read_hidden_generator
+
+# 2b. No file under eval/ may hold held-out samples (they are generated in memory)
+python3 - <<'PY' | tee redteam/hardened/results/heldout_scan.txt
+import json, pathlib
+hits = []
+for p in sorted(pathlib.Path("eval").rglob("*")):
+    if p.is_file() and p.suffix not in (".py", ".pyc") and b"_held_out" in p.read_bytes():
+        hits.append(str(p))
+print("non-code files under eval/ containing held-out samples:", hits or "none")
+PY
 
 # 3. Hidden test does not read data/: corrupt the public data file, rerun the reference
 cp data/reason_benchmarks.json /tmp/reason_benchmarks.backup.json
