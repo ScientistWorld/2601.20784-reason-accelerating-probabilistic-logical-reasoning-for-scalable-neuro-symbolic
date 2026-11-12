@@ -1,5 +1,7 @@
 # Design Notes
 
+> **Superseded (2026-11-12, iteration 11).** This note describes the earlier artifact-based evaluator, in which methods reported their own statistics. The gym now runs each method as a procedure on hidden instances and validates the returned models itself; see `HARDENING.md`.
+
 ## Checks Performed
 
 - Read `scripts/evaluate_train.sh` and `scripts/evaluate_test.sh` side by side. The test script invokes `eval/test/evaluate.py` and writes `scoring/scores_test.json`; the train script invokes `eval/train/evaluate.py` and writes `scoring/scores_train.json`.

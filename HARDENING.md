@@ -5,6 +5,7 @@ This responds to the iteration-10 audit in [REDTEAM.md](REDTEAM.md). The old gym
 Evidence comes from two runs of [scripts/run.sh](scripts/run.sh). The results are in [redteam/hardened/results/](redteam/hardened/results) and [redteam/hardened/summary.json](redteam/hardened/summary.json).
 - Job `3b7af4eb-e27` ran before the held-out-file fix described below.
 - Job `58503c26-32d` ran after it. Every audit group in that job scored exactly its intended set of methods, and the reference's hidden scores are identical to the first job's.
+- Job `b7c498e2-4e6` is the final confirmation with the finished code. It ran as a single attempt in 486 s with exit 0. Both `validate.py` runs passed, only the two official manifests remained afterwards, and the audit ranks are identical to `58503c26-32d`.
 
 ## What changed, finding by finding
 

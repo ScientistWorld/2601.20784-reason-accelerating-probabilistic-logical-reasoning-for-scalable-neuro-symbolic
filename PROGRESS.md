@@ -15,7 +15,22 @@ Continuation audit on 2026-06-05 rechecked the implementation and restored `core
 
 ## Results
 
-Current local results:
+### Current results: hardened gym (iteration 11, job `b7c498e2-4e6`)
+
+The gym now runs each method as a procedure on hidden instances and scores what it returns. HMM and PC models must fit evaluator-fixed memory budgets, and SAT outputs must be exactly equivalent to the input. See `HARDENING.md` and `briefing/evaluation.md`.
+
+| Slice / method | SAT memory reduction % | HMM likelihood retention @40/30/20% budget | PC likelihood retention @20/15/12% budget |
+|---|---:|---|---|
+| test, `reason_algorithm` (paper method) | 41.26 | 97.67 / 94.00 / 75.24 | 99.93 / 98.65 / 96.92 |
+| test, `magnitude_pruning` (baseline) | 0.00 | 97.87 / 93.13 / 63.97 | 98.19 / 94.39 / 89.16 |
+| train, `reason_algorithm` | 36.77 | 97.55 / 93.68 / 76.43 | 99.78 / 98.33 / 95.41 |
+| train, `magnitude_pruning` | 0.00 | 97.78 / 93.02 / 63.92 | 98.42 / 93.93 / 86.20 |
+
+This supports the paper's Table IV direction at kernel level. Flow-based pruning keeps substantially more task likelihood than parameter-magnitude pruning at tight memory budgets (HMM @20%: 75.2 vs 64.0; PC @12%: 96.9 vs 89.2). Implication-based SAT pruning removes 41% of formula memory while staying exactly equivalent. Both methods are comparable at the loosest budget.
+
+### Earlier results (pre-hardening artifact evaluator; superseded)
+
+Earlier local results:
 
 - `sat_implication_pruning`: 16.635% pruned memory reduction, 28.796% final regularized memory reduction, semantics preserved = 1.0, implication proof sound = 1.0.
 - `hmm_flow_pruning`: 27.470% pruned memory reduction, 32.497% final regularized memory reduction, average likelihood retention = 100.0%.

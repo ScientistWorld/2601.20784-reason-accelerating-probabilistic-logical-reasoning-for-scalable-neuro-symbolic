@@ -1,5 +1,7 @@
 # Verification Report
 
+> **Superseded (2026-11-12, iteration 11).** This note describes the earlier artifact-based evaluator, in which methods reported their own statistics. The gym now runs each method as a procedure on hidden instances and validates the returned models itself; see `HARDENING.md`.
+
 ## Initial Assessment
 
 The workspace already had a justified `core_claim` reproduction. The implemented code runs the paper-identifiable graph-compression pipeline on logical, sequential probabilistic, and probabilistic-circuit workloads; evaluation reads artifacts rather than method code; and the existing reproduced scores support the central compression-with-fidelity claim.
