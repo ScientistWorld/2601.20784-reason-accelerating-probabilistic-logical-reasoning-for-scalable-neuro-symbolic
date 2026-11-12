@@ -5,4 +5,4 @@ action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: "CPU audit: genuine exact-merging improvement, weaker and three-seed reference runs, exhaustive PC search, and disk-artifact scoring shortcuts; per-case restoration."
+notes: "Focused CPU follow-up: worse graph with retained unused nodes, and a poorly fitting normalized single Gaussian; rerank against freshly rerun reference."
