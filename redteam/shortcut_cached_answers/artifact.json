@@ -1,0 +1,118 @@
+{
+  "method": "audit_candidate",
+  "results": {
+    "sat_implication_pruning": {
+      "kernel": "sat",
+      "baseline": {
+        "nodes": 151,
+        "edges": 378,
+        "memory_units": 529,
+        "max_fanin": 98
+      },
+      "baseline_regularized": {
+        "nodes": 331,
+        "edges": 558,
+        "memory_units": 889,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 148,
+        "edges": 293,
+        "memory_units": 441,
+        "max_fanin": 98
+      },
+      "reason": {
+        "nodes": 244,
+        "edges": 389,
+        "memory_units": 633,
+        "max_fanin": 2
+      },
+      "removed_literals": 85,
+      "clauses_before": 98,
+      "clauses_after": 98,
+      "semantics_preserved": 1.0,
+      "implication_proof_sound": 1.0,
+      "original_satisfiable": 1.0,
+      "pruned_satisfiable": 1.0,
+      "memory_reduction_pct": 16.6351606805293,
+      "edge_reduction_pct": 22.486772486772487,
+      "final_regularized_memory_reduction_pct": 28.796400449943757,
+      "final_regularized_edge_reduction_pct": 30.28673835125448,
+      "fanin_regularized": 1.0
+    },
+    "hmm_flow_pruning": {
+      "kernel": "hmm",
+      "baseline": {
+        "nodes": 577,
+        "edges": 6780,
+        "memory_units": 7357,
+        "max_fanin": 12
+      },
+      "baseline_regularized": {
+        "nodes": 6227,
+        "edges": 12430,
+        "memory_units": 18657,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 577,
+        "edges": 4759,
+        "memory_units": 5336,
+        "max_fanin": 12
+      },
+      "reason": {
+        "nodes": 4206,
+        "edges": 8388,
+        "memory_units": 12594,
+        "max_fanin": 2
+      },
+      "transition_edges_before": 144,
+      "transition_edges_after": 101,
+      "avg_loglik_before": -61.518519585887915,
+      "avg_loglik_after": -61.43963121254327,
+      "avg_loglik_retention_pct": 100.0,
+      "memory_reduction_pct": 27.47043631915183,
+      "edge_reduction_pct": 29.80825958702065,
+      "final_regularized_memory_reduction_pct": 32.49718604277215,
+      "final_regularized_edge_reduction_pct": 32.51810136765889,
+      "fanin_regularized": 1.0
+    },
+    "pc_flow_pruning": {
+      "kernel": "pc",
+      "baseline": {
+        "nodes": 61,
+        "edges": 60,
+        "memory_units": 121,
+        "max_fanin": 12
+      },
+      "baseline_regularized": {
+        "nodes": 95,
+        "edges": 94,
+        "memory_units": 189,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 46,
+        "edges": 45,
+        "memory_units": 91,
+        "max_fanin": 9
+      },
+      "reason": {
+        "nodes": 71,
+        "edges": 70,
+        "memory_units": 141,
+        "max_fanin": 2
+      },
+      "sum_edges_before": 12,
+      "sum_edges_after": 9,
+      "avg_loglik_before": -5.477801493480514,
+      "avg_loglik_after": -5.474870900101064,
+      "avg_loglik_retention_pct": 100.0,
+      "memory_reduction_pct": 24.793388429752067,
+      "edge_reduction_pct": 25.0,
+      "final_regularized_memory_reduction_pct": 25.396825396825395,
+      "final_regularized_edge_reduction_pct": 25.53191489361702,
+      "fanin_regularized": 1.0
+    }
+  }
+}

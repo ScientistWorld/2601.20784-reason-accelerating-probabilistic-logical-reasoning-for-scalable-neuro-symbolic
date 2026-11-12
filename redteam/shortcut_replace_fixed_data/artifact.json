@@ -1,0 +1,103 @@
+{
+  "results": {
+    "sat_implication_pruning": {
+      "kernel": "sat",
+      "baseline": {
+        "nodes": 151,
+        "edges": 378,
+        "memory_units": 529,
+        "max_fanin": 98
+      },
+      "baseline_regularized": {
+        "nodes": 331,
+        "edges": 558,
+        "memory_units": 889,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 148,
+        "edges": 293,
+        "memory_units": 441,
+        "max_fanin": 98
+      },
+      "reason": {
+        "nodes": 244,
+        "edges": 389,
+        "memory_units": 633,
+        "max_fanin": 2
+      },
+      "removed_literals": 85,
+      "clauses_before": 98,
+      "clauses_after": 98,
+      "semantics_preserved": 1.0,
+      "implication_proof_sound": 1.0,
+      "original_satisfiable": 1.0,
+      "pruned_satisfiable": 1.0
+    },
+    "hmm_flow_pruning": {
+      "kernel": "hmm",
+      "baseline": {
+        "nodes": 577,
+        "edges": 6780,
+        "memory_units": 7357,
+        "max_fanin": 12
+      },
+      "baseline_regularized": {
+        "nodes": 6227,
+        "edges": 12430,
+        "memory_units": 18657,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 577,
+        "edges": 717,
+        "memory_units": 1294,
+        "max_fanin": 12
+      },
+      "reason": {
+        "nodes": 634,
+        "edges": 774,
+        "memory_units": 1408,
+        "max_fanin": 2
+      },
+      "transition_edges_before": 144,
+      "transition_edges_after": 15,
+      "avg_loglik_before": -117.18765105028645,
+      "avg_loglik_after": -118.80860997786651,
+      "avg_loglik_retention_pct": 19.770901952202127
+    },
+    "pc_flow_pruning": {
+      "kernel": "pc",
+      "baseline": {
+        "nodes": 61,
+        "edges": 60,
+        "memory_units": 121,
+        "max_fanin": 12
+      },
+      "baseline_regularized": {
+        "nodes": 95,
+        "edges": 94,
+        "memory_units": 189,
+        "max_fanin": 2
+      },
+      "pruned": {
+        "nodes": 11,
+        "edges": 10,
+        "memory_units": 21,
+        "max_fanin": 4
+      },
+      "reason": {
+        "nodes": 15,
+        "edges": 14,
+        "memory_units": 29,
+        "max_fanin": 2
+      },
+      "sum_edges_before": 12,
+      "sum_edges_after": 2,
+      "avg_loglik_before": -25.902710015805194,
+      "avg_loglik_after": -25.902710015805194,
+      "avg_loglik_retention_pct": 100.0
+    }
+  },
+  "method": "audit_candidate"
+}

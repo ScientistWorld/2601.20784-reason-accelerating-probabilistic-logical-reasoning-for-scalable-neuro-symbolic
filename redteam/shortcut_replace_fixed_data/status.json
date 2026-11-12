@@ -1,0 +1,17 @@
+{
+  "case": "shortcut_replace_fixed_data",
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "hidden_arguments": [],
+  "fresh_process": true,
+  "method_exit": 0,
+  "train_exit": 0,
+  "methods_on_disk": [
+    "unpruned_baseline",
+    "audit_candidate",
+    "reason_algorithm"
+  ],
+  "data_sha256_at_test": "127dcb13de8bf8d110e6a6f1820ecdf665d6ab924eda7b9dc1a9319c0d6f2f44",
+  "test_exit": 0,
+  "test_score_written": true,
+  "seconds": 1.1462648599990644
+}

@@ -1,0 +1,80 @@
+{
+  "slice": "train",
+  "experiments": {
+    "hmm_flow_pruning": {
+      "results": {
+        "audit_candidate": {
+          "memory_reduction_pct": 127.18499388337638,
+          "compression_balance_pct": 114.74926253687316,
+          "final_regularized_memory_reduction_pct": 110.71983705847671,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.07888837334464682
+        },
+        "reason_algorithm": {
+          "memory_reduction_pct": 27.47043631915183,
+          "compression_balance_pct": 27.47043631915183,
+          "final_regularized_memory_reduction_pct": 32.49718604277215,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.07888837334464682
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "final_regularized_memory_reduction_pct": 0.0,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.0
+        }
+      }
+    },
+    "pc_flow_pruning": {
+      "results": {
+        "audit_candidate": {
+          "memory_reduction_pct": 1752.892561983471,
+          "compression_balance_pct": 1752.892561983471,
+          "final_regularized_memory_reduction_pct": 1158.2010582010582,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.0029305933794496752
+        },
+        "reason_algorithm": {
+          "memory_reduction_pct": 24.793388429752067,
+          "compression_balance_pct": 24.793388429752067,
+          "final_regularized_memory_reduction_pct": 25.396825396825395,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.0029305933794496752
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "final_regularized_memory_reduction_pct": 0.0,
+          "avg_loglik_retention_pct": 100.0,
+          "avg_abs_loglik_delta": 0.0
+        }
+      }
+    },
+    "sat_implication_pruning": {
+      "results": {
+        "audit_candidate": {
+          "memory_reduction_pct": 478.0718336483932,
+          "compression_balance_pct": 364.55026455026456,
+          "final_regularized_memory_reduction_pct": 324.9718785151856,
+          "semantics_preserved": 1.0,
+          "implication_proof_sound": 1.0
+        },
+        "reason_algorithm": {
+          "memory_reduction_pct": 16.6351606805293,
+          "compression_balance_pct": 16.6351606805293,
+          "final_regularized_memory_reduction_pct": 28.796400449943757,
+          "semantics_preserved": 1.0,
+          "implication_proof_sound": 1.0
+        },
+        "unpruned_dag": {
+          "memory_reduction_pct": 0.0,
+          "compression_balance_pct": 0.0,
+          "final_regularized_memory_reduction_pct": 0.0,
+          "semantics_preserved": 1.0,
+          "implication_proof_sound": 1.0
+        }
+      }
+    }
+  }
+}

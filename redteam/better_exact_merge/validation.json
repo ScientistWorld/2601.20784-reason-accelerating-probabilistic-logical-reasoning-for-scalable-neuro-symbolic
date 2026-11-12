@@ -1,0 +1,9 @@
+{
+  "hmm_states_before": 12,
+  "hmm_states_after": 6,
+  "pc_components_before": 12,
+  "pc_components_after": 6,
+  "max_lump_error": 0.0,
+  "max_sequence_loglik_delta": 1.4210854715202004e-14,
+  "max_sample_density_delta": 1.0408340855860843e-17
+}

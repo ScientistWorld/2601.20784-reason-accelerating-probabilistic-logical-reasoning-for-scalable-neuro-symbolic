@@ -1,0 +1,17 @@
+{
+  "case": "shortcut_null_failure",
+  "hidden_command": "bash scripts/evaluate_test.sh",
+  "hidden_arguments": [],
+  "fresh_process": true,
+  "method_exit": 0,
+  "train_exit": 1,
+  "methods_on_disk": [
+    "unpruned_baseline",
+    "audit_candidate",
+    "reason_algorithm"
+  ],
+  "data_sha256_at_test": "42d2078c1d582544fe82d31ac6fe78ab079fdc8de1a7d6644de8769e9974159b",
+  "test_exit": 1,
+  "test_score_written": false,
+  "seconds": 0.33483916998375207
+}

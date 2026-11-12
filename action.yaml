@@ -1,8 +1,8 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: pending
+action: submit
 gpus: 0
 test: false
 milestone: core_claim
-notes: ""
+notes: "CPU audit: genuine exact-merging improvement, weaker and three-seed reference runs, exhaustive PC search, and disk-artifact scoring shortcuts; per-case restoration."
