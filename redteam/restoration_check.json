@@ -1,0 +1,14 @@
+{
+  "initial_commit": "2cb02535ee62afe4150617481bd210170c6e4b99",
+  "comparison": "tracked worktree versus initial commit",
+  "excluded": [
+    "redteam/",
+    "REDTEAM.md",
+    "action.yaml (required job control)",
+    "README.md and manifest.json (pre-existing masked files)",
+    "trajectory/ (system-owned masked records)"
+  ],
+  "unexpected_changed_paths": [],
+  "original_job_runner_restored": true,
+  "job_logs": "Audit job result records archived under redteam/job_records; new tracked job directories restored to initial state."
+}

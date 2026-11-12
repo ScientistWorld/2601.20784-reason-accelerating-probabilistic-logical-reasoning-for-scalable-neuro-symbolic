@@ -1,0 +1,24 @@
+{
+  "case": "shortcut_missing_experiment",
+  "status": {
+    "case": "shortcut_missing_experiment",
+    "hidden_command": "bash scripts/evaluate_test.sh",
+    "hidden_arguments": [],
+    "fresh_process": true,
+    "method_exit": 0,
+    "train_exit": 1,
+    "methods_on_disk": [
+      "unpruned_baseline",
+      "audit_candidate",
+      "reason_algorithm"
+    ],
+    "data_sha256_at_test": "42d2078c1d582544fe82d31ac6fe78ab079fdc8de1a7d6644de8769e9974159b",
+    "test_exit": 1,
+    "test_score_written": false,
+    "seconds": 0.3299364899867214
+  },
+  "test_error": "Traceback (most recent call last):\n  File \"/home/user/eval/test/evaluate.py\", line 151, in <module>\n    main()\n  File \"/home/user/eval/test/evaluate.py\", line 141, in main\n    raise KeyError(f\"artifact for {method_name!r} is missing experiment {exp_name!r}\")\nKeyError: \"artifact for 'audit_candidate' is missing experiment 'hmm_flow_pruning'\"\n",
+  "train_error": "Traceback (most recent call last):\n  File \"/home/user/eval/train/evaluate.py\", line 128, in <module>\n    main()\n  File \"/home/user/eval/train/evaluate.py\", line 118, in main\n    raise KeyError(f\"artifact for {method_name!r} is missing experiment {exp_name!r}\")\nKeyError: \"artifact for 'audit_candidate' is missing experiment 'hmm_flow_pruning'\"\n",
+  "scores_test": null,
+  "explanation": "Evaluator exited nonzero; no scores_test.json was produced. No worst-case metric fallback was written."
+}

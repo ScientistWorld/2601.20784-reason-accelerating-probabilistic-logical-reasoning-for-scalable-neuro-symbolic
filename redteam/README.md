@@ -11,7 +11,9 @@ container for these pure-stdlib, file-only candidates.
 
 Run the complete audit as a CPU job with `bash redteam/run_all.sh`.
 Individual cases require `reference_seed0` and `baseline_check` first. Each case
-saves its submitted artifact, train/test scores, and evaluator exit status.
+saves its submitted artifact, available train/test scores, and evaluator exit
+status. The null and missing-experiment shortcuts produce no score files;
+`failure_evidence.json` preserves their exceptions instead.
 `redteam/summarize.py` computes the rank with coefficient magnitudes, metric
 directions, experiment weights, and population standard deviations. It reports
 both a disclosed fixed audit cohort and each candidate/reference pair, because
@@ -19,6 +21,9 @@ the eventual normalization over future attempts cannot be known in advance.
 The ranking anchor is the freshly rerun reference, avoiding spurious pairwise
 rank changes from machine-level rounding in the pre-existing score file. The
 maximum difference from that pre-existing reference is recorded separately.
+
+See [the completed audit](../REDTEAM.md) for quality checks, paper departures,
+shortcut outcomes, and normalization caveats. No gym repairs are included.
 
 `redteam/.working/` is transient backup state, never a candidate input. All
 temporary changes to data, method, checkpoints, and score files are restored
