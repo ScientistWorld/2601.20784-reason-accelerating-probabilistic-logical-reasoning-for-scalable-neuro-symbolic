@@ -19,23 +19,23 @@
           "ll_retention_pct_mem20": 63.969651005686636
         },
         "reason_algorithm": {
-          "ll_retention_pct_mem40": 97.66786026540994,
-          "ll_retention_pct_mem30": 93.99768028131741,
-          "ll_retention_pct_mem20": 75.24110736795848
+          "ll_retention_pct_mem40": 97.66786026540993,
+          "ll_retention_pct_mem30": 93.9976802813174,
+          "ll_retention_pct_mem20": 75.24110736795849
         }
       }
     },
     "pc_flow_pruning": {
       "results": {
         "magnitude_pruning": {
-          "ll_retention_pct_mem20": 98.18945864585504,
-          "ll_retention_pct_mem15": 94.39087427575758,
-          "ll_retention_pct_mem12": 89.16003879739111
+          "ll_retention_pct_mem20": 98.18945864585508,
+          "ll_retention_pct_mem15": 94.39087427575761,
+          "ll_retention_pct_mem12": 89.16003879739117
         },
         "reason_algorithm": {
-          "ll_retention_pct_mem20": 99.93107734587167,
-          "ll_retention_pct_mem15": 98.65126626086436,
-          "ll_retention_pct_mem12": 96.92211635051699
+          "ll_retention_pct_mem20": 99.93107734587171,
+          "ll_retention_pct_mem15": 98.65126626086439,
+          "ll_retention_pct_mem12": 96.92211635051702
         }
       }
     }

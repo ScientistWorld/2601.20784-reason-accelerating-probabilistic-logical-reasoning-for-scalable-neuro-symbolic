@@ -15,5 +15,5 @@
   "hidden_command": "bash scripts/evaluate_test.sh",
   "arguments": [],
   "test_exit": 0,
-  "test_seconds": 68.3
+  "test_seconds": 76.8
 }
