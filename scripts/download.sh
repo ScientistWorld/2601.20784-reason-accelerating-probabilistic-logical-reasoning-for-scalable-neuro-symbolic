@@ -1,26 +1,22 @@
 #!/bin/bash
-# Download all data and models needed for this environment.
+# Prepare all data needed by this environment (idempotent).
 #
-# Run on a node with internet access BEFORE building the container
-# or submitting compute jobs.
+# Estimated total download size: 0 GB (no external assets)
+# Estimated disk usage: ~3 MB
 #
-# This script should be idempotent — safe to run multiple times.
-# It should skip files that already exist.
-#
-# Update the storage estimate below as you add downloads.
-#
-# Estimated total download size: 0 GB
-# Estimated disk usage after extraction: <1 MB
-#
-# This paper-specific reproduction has no remote assets. The script exists
-# so a fresh clone can recreate deterministic fixtures before running jobs.
+# This benchmark has no external datasets or model weights: every instance is
+# produced deterministically by agent-authored code (Python's `random`
+# module, stable across versions).  The public train-slice instances live in
+# data/reason_benchmarks.json (tracked in git); this script regenerates the
+# file only when it is missing.  Hidden test instances are produced by the
+# evaluator's own code under eval/test/ and are not part of this script.
 
 set -e
-
-cd /home/user
-export PYTHONPATH="/home/user:${PYTHONPATH:-}"
+cd "$(dirname "$0")/.."
 PYTHON_BIN="${PYTHON:-python3}"
 
-# No external downloads are required. The benchmark fixtures are generated
-# deterministically by data/generate_benchmarks.py.
-"$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json
+if [ ! -f data/reason_benchmarks.json ]; then
+  "$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json
+else
+  echo "data/reason_benchmarks.json present"
+fi

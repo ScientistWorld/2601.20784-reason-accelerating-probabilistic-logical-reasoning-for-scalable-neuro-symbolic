@@ -1,5 +1,8 @@
 # Large files — do not commit (applies everywhere, including tmp/)
-checkpoints/
+# checkpoints/ holds method manifests (small *.json: {method, command}); they ship.
+checkpoints/*
+!checkpoints/.gitkeep
+!checkpoints/*.json
 *.pt
 *.pth
 *.ckpt
@@ -231,3 +234,6 @@ tmp/
 protocol.md
 *.egg-info
 core.[0-9]*
+
+# hardening audit scratch
+redteam/hardened/work/

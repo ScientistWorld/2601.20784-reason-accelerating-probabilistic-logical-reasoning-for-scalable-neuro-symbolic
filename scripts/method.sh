@@ -1,22 +1,20 @@
 #!/bin/bash
-# Run the paper's proposed method.
+# Register the paper's method (REASON Sec. IV: unified DAG, adaptive pruning,
+# two-input regularisation) and score it on the public train slice.
 #
-# This script trains/runs the paper's method using code in method/.
+# A method is a procedure: the evaluators call
+#   python3 -m method.reason_cli --instance IN.json --out OUT.json
+# once per instance.  Registration = a manifest in checkpoints/.
 #
-# Usage:
-#   bash scripts/method.sh
+# Usage: bash scripts/method.sh
 
 set -e
-
-cd /home/user
-export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-PYTHON_BIN="${PYTHON:-python3}"
-
-"$PYTHON_BIN" data/generate_benchmarks.py --out data/reason_benchmarks.json
-"$PYTHON_BIN" -m method.run_reason --data data/reason_benchmarks.json --out checkpoints/reason_outputs.json
-
-if [ ! -f checkpoints/baseline_outputs.json ]; then
-  bash scripts/baseline.sh
+cd "$(dirname "$0")/.."
+mkdir -p checkpoints
+cat > checkpoints/reason_algorithm.json <<'JSON'
+{"method": "reason_algorithm", "command": ["python3", "-m", "method.reason_cli"]}
+JSON
+bash scripts/download.sh
+if [ "${SKIP_EVAL:-0}" != "1" ]; then
+  bash scripts/evaluate.sh
 fi
-
-bash scripts/evaluate.sh checkpoints/reason_outputs.json checkpoints/baseline_outputs.json

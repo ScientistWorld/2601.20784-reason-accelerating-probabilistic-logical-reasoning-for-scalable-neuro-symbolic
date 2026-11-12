@@ -1,30 +1,18 @@
 #!/bin/bash
-# Held-out test-slice evaluator.
+# Hidden test-slice evaluation.  Takes no arguments and scores every method
+# manifest in checkpoints/ on hidden instances held only under eval/test/,
+# writing scoring/scores_test.json.  Each registered procedure is run once
+# per hidden instance (it sees the model, calibration data and budgets, never
+# the held-out data); nothing is retrained.
 #
-# Mirrors scripts/evaluate.sh's artifact contract:
-#   ./evaluate_test.sh <method_artifact> <baseline_artifact>
-# With no artifact arguments, all JSON artifacts under checkpoints/ are scanned.
-# When scoring/scores_train.json exists, this scores every method entry in it.
+# Usage: bash scripts/evaluate_test.sh
 
 set -e
-
-cd /home/user
-export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-PYTHON_BIN="${PYTHON:-python3}"
-
+cd "$(dirname "$0")/.."
+export PYTHONPATH="$(pwd):${PYTHONPATH:-}"
 mkdir -p scoring
-
-ARGS=()
-if [ $# -gt 0 ]; then
-  ARGS+=(--artifact "$1")
-  if [ $# -gt 1 ]; then
-    ARGS+=(--artifact "$2")
-  fi
-else
-  ARGS+=(--artifact-dir checkpoints)
+EXTRA=()
+if [ -n "${REASON_DETAILS_OUT:-}" ]; then
+  EXTRA+=(--details-out "$REASON_DETAILS_OUT")
 fi
-
-"$PYTHON_BIN" eval/test/evaluate.py \
-  "${ARGS[@]}" \
-  --train-scores scoring/scores_train.json \
-  --out scoring/scores_test.json
+python3 eval/test/evaluate.py --methods-dir checkpoints --out scoring/scores_test.json "${EXTRA[@]}"

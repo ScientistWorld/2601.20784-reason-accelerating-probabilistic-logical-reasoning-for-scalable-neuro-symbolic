@@ -1,37 +1,16 @@
 #!/bin/bash
-# Evaluation script — the standard way to evaluate work in this environment.
+# Standard evaluation: score every registered method on the public train slice.
 #
-# This script must be SELF-CONTAINED using only code in eval/.
-# Do NOT import from method/ — evaluate.sh must work even when the
-# paper's method code is hidden from a scientist agent.
+# A method is registered by a manifest  checkpoints/<anything>.json :
+#   {"method": "<name>", "command": ["python3", "-m", "your.module"]}
+# The evaluator runs `<command> --instance IN.json --out OUT.json` once per
+# instance and recomputes every metric from the returned models.  It never
+# imports method code.  Output: scoring/scores.json.
 #
-# Design it so that anyone following the same output format can run
-# this script to evaluate their results.
-#
-# OUTPUT CONTRACT: This script MUST write scoring/scores.json containing
-# a JSON dict nested by experiment, e.g.:
-#   {"imagenet_classification": {"top1_accuracy": 82.1, "top5_accuracy": 94.8}}
-# Experiment and metric names must match the keys in scoring/reference.json.
-# This file is read by the system for automated comparison.
-#
-# Example usage:
-#   ./evaluate.sh <method_and_run_name>                             # evaluate with defaults
-#   ./evaluate.sh <method_and_run_name> checkpoints/epoch_10.pt     # evaluate a specific checkpoint
-#
-# Called from run.sh after training, or independently.
+# Usage: bash scripts/evaluate.sh
 
 set -e
-
-cd /home/user
-export PYTHONPATH="/home/user:${PYTHONPATH:-}"
-PYTHON_BIN="${PYTHON:-python3}"
-
+cd "$(dirname "$0")/.."
+export PYTHONPATH="$(pwd):${PYTHONPATH:-}"
 mkdir -p scoring
-
-METHOD_ARTIFACT="${1:-checkpoints/reason_outputs.json}"
-BASELINE_ARTIFACT="${2:-checkpoints/baseline_outputs.json}"
-
-"$PYTHON_BIN" eval/score_reason.py \
-  --method-artifact "$METHOD_ARTIFACT" \
-  --baseline-artifact "$BASELINE_ARTIFACT" \
-  --out scoring/scores.json
+python3 eval/train/evaluate.py --methods-dir checkpoints --out scoring/scores.json

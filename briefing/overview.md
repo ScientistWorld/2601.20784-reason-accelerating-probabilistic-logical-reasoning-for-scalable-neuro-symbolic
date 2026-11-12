@@ -7,7 +7,7 @@
 
 ## Short Summary
 
-The paper argues that symbolic and probabilistic reasoning stages are a major efficiency bottleneck in neuro-symbolic systems. REASON addresses this with a cross-layer design: algorithmic DAG unification/pruning/regularization, a reconfigurable tree-based accelerator, and GPU-coprocessor integration. The reproduction focuses on the algorithmic layer because full hardware synthesis and cycle-accurate accelerator integration are outside this benchmark environment.
+The paper argues that symbolic and probabilistic reasoning stages are a major efficiency bottleneck in neuro-symbolic systems. REASON addresses this with a cross-layer design: algorithmic DAG unification/pruning/regularization, a reconfigurable tree-based accelerator, and GPU-coprocessor integration. The reproduction focuses on the algorithmic layer (Sec. IV / Table IV) because full hardware synthesis and cycle-accurate accelerator integration are outside this benchmark environment. The gym scores a method as a procedure run on hidden CNF, HMM and probabilistic-circuit instances: logical outputs must be equivalent (memory reduction is scored), probabilistic outputs must fit evaluator-fixed memory budgets (held-out task likelihood is scored).
 
 ## Key Results
 

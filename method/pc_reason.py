@@ -1,75 +1,151 @@
-"""REASON probabilistic-circuit DAG lowering and circuit-flow pruning."""
+"""REASON probabilistic-circuit pruning via circuit flow (Sec. IV-B b).
+
+For an input x the flow through sum edge (n, c) is
+
+    F_{n,c}(x) = theta_{n,c} p_c(x) / p_n(x) * F_n(x),
+
+with F_root(x) = 1 and a product node passing its flow to every child.  The
+cumulative flow over the task dataset D (calibration samples) is
+F_{n,c}(D) = sum_x F_{n,c}(x).  Edges with the smallest cumulative flow are
+pruned (globally, across all sum nodes) until the compiled two-input DAG fits
+the memory budget; every sum node keeps at least one input and its weights
+are renormalised.
+"""
 
 from __future__ import annotations
 
-import math
-
-from method.reason_dag import DAG
+from method.reason_dag import build_pc_dag
 
 
-def gaussian_pdf(x: float, mean: float, stdev: float) -> float:
-    var = stdev * stdev
-    return math.exp(-0.5 * (x - mean) ** 2 / var) / math.sqrt(2.0 * math.pi * var)
-
-
-def component_prob(x: list[float], mean: list[float], stdev: list[float]) -> float:
-    p = 1.0
-    for xi, mi, si in zip(x, mean, stdev):
-        p *= gaussian_pdf(xi, mi, si)
-    return p
-
-
-def build_pc_dag(weights: list[float], dimensions: int) -> DAG:
-    dag = DAG()
-    component_nodes = []
-    for k, w in enumerate(weights):
-        if w <= 0.0:
+def _reachable(nodes, root):
+    seen = set()
+    stack = [root]
+    while stack:
+        i = stack.pop()
+        if i in seen:
             continue
-        leaves = [dag.add(f"leaf_{k}_{d}", "gaussian_leaf") for d in range(dimensions)]
-        prod = dag.add(f"component_{k}", "product", leaves, w)
-        component_nodes.append(prod)
-    dag.add("root", "sum", component_nodes)
-    return dag
+        seen.add(i)
+        if nodes[i][0] != "leaf":
+            stack.extend(nodes[i][1])
+    return sorted(seen)
 
 
-def avg_loglik(samples: list[list[float]], weights: list[float], means: list[list[float]], stdevs: list[list[float]]) -> float:
-    total = 0.0
-    for x in samples:
-        p = sum(w * component_prob(x, m, s) for w, m, s in zip(weights, means, stdevs))
-        total += math.log(max(p, 1e-300))
-    return total / len(samples)
+def forward(nodes, order, samples):
+    cols = {}
+    val = {}
+    for i in order:
+        node = nodes[i]
+        if node[0] == "leaf":
+            v = node[1]
+            if v not in cols:
+                cols[v] = [1 if x[v] == "1" else 0 for x in samples]
+            p, q = node[2], 1.0 - node[2]
+            val[i] = [p if b else q for b in cols[v]]
+        elif node[0] == "prod":
+            ch = node[1]
+            acc = val[ch[0]]
+            for c in ch[1:]:
+                acc = [a * b for a, b in zip(acc, val[c])]
+            val[i] = acc
+        else:
+            acc = [0.0] * len(samples)
+            for c, w in zip(node[1], node[2]):
+                if w > 0.0:
+                    acc = [a + w * b for a, b in zip(acc, val[c])]
+            val[i] = acc
+    return val
 
 
-def run_pc(instance: dict, prune_fraction: float = 0.30) -> dict:
-    weights = instance["weights"]
-    means = instance["means"]
-    stdevs = instance["stdevs"]
-    samples = instance["samples"]
-    flow = [0.0 for _ in weights]
-    for x in samples:
-        contrib = [w * component_prob(x, m, s) for w, m, s in zip(weights, means, stdevs)]
-        denom = sum(contrib)
-        for k, c in enumerate(contrib):
-            flow[k] += c / max(denom, 1e-300)
-    remove_n = max(1, int(len(weights) * prune_fraction))
-    remove = {k for _v, k in sorted((v, k) for k, v in enumerate(flow))[:remove_n]}
-    kept_weights = [0.0 if k in remove else w for k, w in enumerate(weights)]
-    z = sum(kept_weights)
-    kept_weights = [w / z for w in kept_weights]
-    before = build_pc_dag(weights, len(means[0]))
-    after_prune = build_pc_dag(kept_weights, len(means[0]))
-    after = after_prune.two_input_regularize()
-    ll_before = avg_loglik(samples, weights, means, stdevs)
-    ll_after = avg_loglik(samples, kept_weights, means, stdevs)
-    return {
-        "kernel": "pc",
-        "baseline": before.summary(),
-        "baseline_regularized": before.two_input_regularize().summary(),
-        "pruned": after_prune.summary(),
-        "reason": after.summary(),
-        "sum_edges_before": len(weights),
-        "sum_edges_after": len(weights) - len(remove),
-        "avg_loglik_before": ll_before,
-        "avg_loglik_after": ll_after,
-        "avg_loglik_retention_pct": min(100.0, 100.0 * math.exp(ll_after - ll_before)),
-    }
+def circuit_flows(nodes, root, samples):
+    """Cumulative edge flow {(sum_node, child_position): F_{n,c}(D)}."""
+    order = _reachable(nodes, root)
+    val = forward(nodes, order, samples)
+    n = len(samples)
+    flow = {root: [1.0] * n}
+    edge_flow = {}
+    for i in reversed(order):
+        f = flow.pop(i, None)
+        if f is None or nodes[i][0] == "leaf":
+            continue
+        node = nodes[i]
+        if node[0] == "prod":
+            for c in node[1]:
+                cur = flow.get(c)
+                flow[c] = list(f) if cur is None else [x + y for x, y in zip(cur, f)]
+            continue
+        pn = val[i]
+        ratio = [fx / px if px > 0.0 else 0.0 for fx, px in zip(f, pn)]
+        for pos, (c, w) in enumerate(zip(node[1], node[2])):
+            if w <= 0.0:
+                continue
+            fc = [w * pc * r for pc, r in zip(val[c], ratio)]
+            edge_flow[(i, pos)] = sum(fc)
+            cur = flow.get(c)
+            flow[c] = fc if cur is None else [x + y for x, y in zip(cur, fc)]
+    return edge_flow
+
+
+def pc_memory(nodes, root, removed=frozenset()) -> int:
+    return build_pc_dag(nodes, root, removed).regularized_memory()
+
+
+def removal_sequence(nodes, root, scores):
+    order = _reachable(nodes, root)
+    left = {}
+    cands = []
+    for i in order:
+        node = nodes[i]
+        if node[0] != "sum":
+            continue
+        left[i] = sum(1 for w in node[2] if w > 0.0)
+        for pos, w in enumerate(node[2]):
+            if w > 0.0:
+                cands.append((scores.get((i, pos), 0.0), (i, pos)))
+    cands.sort()
+    seq = []
+    for _s, (i, pos) in cands:
+        if left[i] <= 1:
+            continue
+        left[i] -= 1
+        seq.append((i, pos))
+    return seq
+
+
+def apply_removal(nodes, removed):
+    out = []
+    for i, node in enumerate(nodes):
+        if node[0] != "sum":
+            out.append(node)
+            continue
+        kept = [(c, w) for p, (c, w) in enumerate(zip(node[1], node[2])) if w > 0.0 and (i, p) not in removed]
+        z = sum(w for _, w in kept)
+        out.append(["sum", [c for c, _ in kept], [w / z for _, w in kept]])
+    return out
+
+
+def prune_to_budget(nodes, root, seq, budget):
+    def mem(k):
+        return pc_memory(nodes, root, frozenset(seq[:k]))
+
+    lo, hi = 0, len(seq)
+    if mem(0) <= budget:
+        hi = 0
+    while lo < hi:
+        mid = (lo + hi) // 2
+        if mem(mid) <= budget:
+            hi = mid
+        else:
+            lo = mid + 1
+    return apply_removal(nodes, set(seq[:hi])), hi
+
+
+def run_pc(instance: dict) -> dict:
+    nodes = instance["circuit"]["nodes"]
+    root = instance["circuit"]["root"]
+    scores = circuit_flows(nodes, root, instance["calibration"])
+    seq = removal_sequence(nodes, root, scores)
+    models = []
+    for budget in instance["budgets"]:
+        pruned, _k = prune_to_budget(nodes, root, seq, budget)
+        models.append({"nodes": pruned, "root": root})
+    return {"models": models}

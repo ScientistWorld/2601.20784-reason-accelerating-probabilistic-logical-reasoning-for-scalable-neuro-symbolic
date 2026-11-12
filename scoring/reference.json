@@ -1,172 +1,95 @@
 {
+  "_note": "Scaled-down algorithmic reproduction of REASON Sec. IV / Table IV. The paper evaluates full neuro-symbolic systems on ten real datasets; this gym evaluates the same three kernel families (CNF logic, HMM, probabilistic circuit) on generated instances, scoring each method's procedure on hidden instances. Paper numbers are kept unchanged: where they are not on the gym's scale they sit under keys starting with '_' (see each experiment). Retention metrics are 100*exp(mean change in held-out log-likelihood) of the transformed model vs the original model (per sample for PCs, per token for HMMs) at an evaluator-fixed memory budget; memory = nodes + edges of the two-input-regularised DAG compiled by the evaluator.",
   "experiments": {
     "sat_implication_pruning": {
-      "description": "Logical reasoning graph compression: preserve CNF semantics while reducing redundant literal/edge structure.",
-      "weight": 0.25,
+      "description": "Logical reasoning graph compression: the transformed CNF must have exactly the same models as the input (certified by the evaluator); score is the memory reduction of its two-input DAG, averaged over hidden instances.",
+      "weight": 0.30,
       "primary_metric": "memory_reduction_pct",
       "metrics": {
         "memory_reduction_pct": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Visible compression benefit: percent reduction in reduced DAG memory units relative to the unpruned DAG."
-        },
-        "compression_balance_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.35,
-          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
-        },
-        "semantics_preserved": {
-          "higher_is_better": true,
-          "coefficient": 1.0,
-          "description": "Correctness constraint: the transformed logical workload must preserve the original satisfiability semantics."
-        },
-        "implication_proof_sound": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Correctness constraint: every removed SAT literal must be justified by reachability in the binary-clause implication graph."
-        },
-        "edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Held-out structural compression metric measuring the percent reduction in DAG edges."
-        },
-        "final_regularized_memory_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "final_regularized_edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "fanin_regularized": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Constraint metric checking whether the transformed reasoning DAG keeps local fan-in bounded."
-        },
-        "regularized_memory_overhead_pct": {
-          "higher_is_better": false,
-          "coefficient": -0.15,
-          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
+          "description": "100*(M_in - M_out)/M_in with M = nodes+edges of the evaluator-compiled, two-input-regularised CNF DAG (literal leaves, clause OR nodes, formula AND). Clipped to [0,100] per instance. Requires logical equivalence; a non-equivalent or uncertifiable output fails the run."
         }
       },
       "results": {
-        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "semantics_preserved": 1.0},
-        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 21.0, "semantics_preserved": 1.0}
-      }
+        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0},
+        "magnitude_pruning": {"type": "baseline"},
+        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 21.0}
+      },
+      "_paper_table_iv": {
+        "AlphaGeometry_IMO": {"accuracy_baseline": 83, "accuracy_after": 83, "memory_reduction_pct": 25},
+        "AlphaGeometry_MiniF2F": {"accuracy_baseline": 81, "accuracy_after": 81, "memory_reduction_pct": 21},
+        "LINC_FOLIO": {"accuracy_baseline": 92, "accuracy_after": 91, "memory_reduction_pct": 38},
+        "LINC_ProofWriter": {"accuracy_baseline": 84, "accuracy_after": 84, "memory_reduction_pct": 26}
+      },
+      "_paper_note": "reason_algorithm.memory_reduction_pct = 21 is the paper's AlphaGeometry/MiniF2F memory reduction (same quantity, different workload; the paper's logical workloads span 21-38%)."
     },
     "hmm_flow_pruning": {
-      "description": "Sequential probabilistic reasoning graph compression: preserve likelihood while reducing transition structure.",
+      "description": "Sequential probabilistic reasoning graph compression: the transformed HMM must fit each evaluator-fixed memory budget (40/30/20% of the original's two-input DAG memory); score is held-out per-token likelihood retention on the deployment task at each budget, averaged over hidden instances.",
       "weight": 0.35,
-      "primary_metric": "memory_reduction_pct",
+      "primary_metric": "ll_retention_pct_mem40",
       "metrics": {
-        "memory_reduction_pct": {
+        "ll_retention_pct_mem40": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Visible compression benefit: percent reduction in reduced HMM DAG memory units relative to the unpruned DAG."
+          "description": "100*exp(mean over held-out task sequences of [log p_out(x) - log p_in(x)] / T) for the model submitted under the 40% memory budget. Can exceed 100. Per-sequence change floored at -30 nats."
         },
-        "compression_balance_pct": {
+        "ll_retention_pct_mem30": {
           "higher_is_better": true,
-          "coefficient": 0.35,
-          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
+          "coefficient": 1.0,
+          "description": "Same at the 30% memory budget."
         },
-        "avg_loglik_retention_pct": {
+        "ll_retention_pct_mem20": {
           "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when transformation improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
-        },
-        "edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Held-out structural compression metric measuring the percent reduction in HMM transition DAG edges."
-        },
-        "final_regularized_memory_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "final_regularized_edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "fanin_regularized": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Constraint metric checking whether the transformed sequential reasoning DAG keeps local fan-in bounded."
-        },
-        "regularized_memory_overhead_pct": {
-          "higher_is_better": false,
-          "coefficient": -0.15,
-          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
-        },
-        "avg_abs_loglik_delta": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after transformation."
+          "coefficient": 1.0,
+          "description": "Same at the 20% memory budget."
         }
       },
       "results": {
-        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
-        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 29.0, "avg_loglik_retention_pct": 98.8506}
-      }
+        "unpruned_dag": {"type": "baseline"},
+        "magnitude_pruning": {"type": "baseline"},
+        "reason_algorithm": {"type": "proposed", "ll_retention_pct_mem40": 98.8506}
+      },
+      "_paper_table_iv": {
+        "CtrlG_CoAuthor": {"success_rate_baseline": 87, "success_rate_after": 86, "memory_reduction_pct": 29},
+        "GeLaTo_CommonGen": {"bleu_baseline": 30.3, "bleu_after": 30.2, "memory_reduction_pct": 41},
+        "GeLaTo_News": {"bleu_baseline": 5.4, "bleu_after": 5.4, "memory_reduction_pct": 27}
+      },
+      "_paper_note": "reason_algorithm.ll_retention_pct_mem40 = 98.8506 is the paper's task-performance ratio 86/87 (Ctrl-G, CoAuthor) at the paper's own 29% memory reduction. It is not the same quantity (task success vs likelihood) nor the same operating point (the gym's first budget removes 60% of memory); it is recorded only because the schema requires a proposed value."
     },
     "pc_flow_pruning": {
-      "description": "Probabilistic circuit graph compression: preserve likelihood while reducing mixture/circuit structure.",
-      "weight": 0.40,
-      "primary_metric": "memory_reduction_pct",
+      "description": "Probabilistic-circuit graph compression: the transformed circuit must be a valid (smooth, decomposable, normalised) circuit over the same variables that fits each evaluator-fixed memory budget (20/15/12% of the original's two-input DAG memory); score is held-out per-sample likelihood retention on the deployment task at each budget, averaged over hidden instances.",
+      "weight": 0.35,
+      "primary_metric": "ll_retention_pct_mem20",
       "metrics": {
-        "memory_reduction_pct": {
+        "ll_retention_pct_mem20": {
           "higher_is_better": true,
           "coefficient": 1.0,
-          "description": "Visible compression benefit: percent reduction in reduced probabilistic-circuit DAG memory units relative to the unpruned DAG."
+          "description": "100*exp(mean over held-out task samples of [log p_out(x) - log p_in(x)]) for the circuit submitted under the 20% memory budget. Can exceed 100. Per-sample change floored at -20 nats."
         },
-        "compression_balance_pct": {
+        "ll_retention_pct_mem15": {
           "higher_is_better": true,
-          "coefficient": 0.35,
-          "description": "Visible anti-shortcut benefit: the smaller of memory and edge reduction, discouraging one-dimensional compression."
+          "coefficient": 1.0,
+          "description": "Same at the 15% memory budget."
         },
-        "avg_loglik_retention_pct": {
+        "ll_retention_pct_mem12": {
           "higher_is_better": true,
-          "coefficient": 0.0,
-          "description": "Diagnostic likelihood-retention percentage. The current artifacts saturate this value at 100 when transformation improves log-likelihood, so scoring uses avg_abs_loglik_delta as the active likelihood constraint."
-        },
-        "edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Held-out structural compression metric measuring the percent reduction in probabilistic-circuit DAG edges."
-        },
-        "final_regularized_memory_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.5,
-          "description": "Final executable-DAG benefit: memory reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "final_regularized_edge_reduction_pct": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Final executable-DAG benefit: edge reduction after both the unpruned baseline and candidate DAG are converted to two-input form."
-        },
-        "fanin_regularized": {
-          "higher_is_better": true,
-          "coefficient": 0.25,
-          "description": "Constraint metric checking whether the transformed probabilistic-circuit DAG keeps local fan-in bounded."
-        },
-        "regularized_memory_overhead_pct": {
-          "higher_is_better": false,
-          "coefficient": -0.15,
-          "description": "Held-out constraint penalizing fan-in regularization that satisfies the bound by greatly increasing memory units."
-        },
-        "avg_abs_loglik_delta": {
-          "higher_is_better": false,
-          "coefficient": -0.2,
-          "description": "Held-out likelihood constraint measuring the absolute change in average log-likelihood after transformation."
+          "coefficient": 1.0,
+          "description": "Same at the 12% memory budget."
         }
       },
       "results": {
-        "unpruned_dag": {"type": "baseline", "memory_reduction_pct": 0.0, "avg_loglik_retention_pct": 100.0},
-        "reason_algorithm": {"type": "proposed", "memory_reduction_pct": 37.0, "avg_loglik_retention_pct": 99.2084}
-      }
+        "unpruned_dag": {"type": "baseline"},
+        "magnitude_pruning": {"type": "baseline"},
+        "reason_algorithm": {"type": "proposed", "ll_retention_pct_mem20": 99.2084}
+      },
+      "_paper_table_iv": {
+        "R2Guard_TwinSafety": {"auprc_baseline": 0.758, "auprc_after": 0.752, "memory_reduction_pct": 37},
+        "R2Guard_XSTest": {"auprc_baseline": 0.878, "auprc_after": 0.881, "memory_reduction_pct": 30},
+        "NeuroPC_AwA2": {"accuracy_baseline": 87, "accuracy_after": 87, "memory_reduction_pct": 43}
+      },
+      "_paper_note": "reason_algorithm.ll_retention_pct_mem20 = 99.2084 is the paper's AUPRC ratio 0.752/0.758 (R2-Guard, TwinSafety) at the paper's own 37% memory reduction; not the same quantity or operating point, recorded only because the schema requires a proposed value."
     }
   }
 }
