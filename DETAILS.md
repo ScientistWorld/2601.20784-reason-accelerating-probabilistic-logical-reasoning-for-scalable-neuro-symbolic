@@ -429,6 +429,44 @@ Ranking compares each metric against the reference method, weighted by the coeff
 
 </details>
 
+### Iteration 11: claude-opus-5-5 (hardener)
+- **Milestone**: `core_claim` | **Status**: done
+- **Working time**: 1.2h | **GPU**: 0.0h
+- **Jobs**: 8 total (6 completed, 2 failed)
+
+<details>
+<summary>Progress Log</summary>
+
+### [2026-06-04 00:00] - method_runs
+- Implemented the REASON Sec. IV algorithmic pipeline for CNF/SAT, HMM, and probabilistic-circuit kernels.
+- Verified that unified DAG construction, adaptive pruning, and two-input regularization execute end to end.
+
+### [2026-06-04 00:00] - core_claim
+- Reproduced the core algorithmic claim on deterministic kernel benchmarks: reasoning DAGs are reduced while preserving logical satisfiability or probabilistic likelihood.
+- `scripts/reproduce.sh` writes method and baseline artifacts, `scripts/evaluate.sh` scores those artifacts without importing `method/`, and `python3 validate.py --compare` passes.
+
+### [2026-06-05 00:00] - core_claim
+- Continuation audit restored `core_claim` after re-reading `method/`, `eval/`, scripts, scoring, and briefing deliverables.
+- Re-ran standalone `scripts/evaluate.sh` and full `scripts/reproduce.sh`; both regenerated scores and passed `python3 validate.py --compare`.
+
+### [2026-06-05 00:30] - core_claim
+- Expanded `scripts/evaluate.sh` scoring output to include all benefit and constraint metrics defined in `scoring/reference.json`.
+- Local full reproduction and train/test evaluator passes validate; a CPU container job is being submitted to verify the patched scoring path.
+
+### [2026-06-05 00:45] - core_claim
+- Final verification confirmed method/eval separation, method-agnostic scoring docs, reusable artifact-based evaluation, and train/test evaluator consistency.
+- Fixed evaluator method-name handling and refreshed documentation; `python3 validate.py --compare` passes.
+
+### [2026-06-05 01:15] - core_claim
+- Strengthened scoring after a sub-agent audit: final regularized DAG compression is now measured against an unpruned baseline after the same two-input regularization step.
+- SAT pruning artifacts now include an implication-reachability proof check for removed literals, in addition to satisfiability preservation.
+
+### [2026-11-12 18:30] - core_claim
+- Hardening (iteration 11) responding to REDTEAM.md: methods are now procedures run on hidden instances; the evaluator validates returned models itself and scores them under fixed memory budgets with exact SAT equivalence. Any failure receives the worst values. See HARDENING.md.
+- Audit jobs `3b7af4eb-e27` and `58503c26-32d` covered 20 cases. Every cheating shortcut fails or at best ties the reference. The genuine improvement scores +0.69, and the baseline and weaker variants rank below the reference. The held-out file leak is fixed: instances are now built in memory, and the blind answer-key scan ties the reference.
+
+</details>
+
 
 ---
 

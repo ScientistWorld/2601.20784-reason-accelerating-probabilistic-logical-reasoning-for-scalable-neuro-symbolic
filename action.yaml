@@ -1,8 +1,6 @@
 # Once you set action to 'submit' or 'done', STOP immediately.
 # Do NOT sleep, poll, or wait for jobs. The system reads this file
 # only after your turn ends.
-action: submit
-gpus: 0
-test: false
+action: done
 milestone: core_claim
-notes: "CPU job: final confirmation run of scripts/run.sh with the finished hardening code. Job 58503c26-32d verified the held-out fix (read_hidden_test now ties the reference; informed read_hidden_generator +0.33 < genuine +0.69; all cheats fail or tie), but the scheduler killed and restarted it. The killed attempt left audit manifests in checkpoints/, so the final validate failed (rc=1). Stray manifests are removed and clean scores restored (local validate passes). run.sh now self-heals at start (clears manifests, restores public data from a backup kept in the workspace) and uses pipefail. Expected: exit 0, two official manifests at the end, validate passes, audit ranks unchanged."
+notes: "Hardening complete. Final confirmation job b7c498e2-4e6 ran as a single attempt with exit 0: reproduction plus validate passed, only the two official manifests remained, no held-out data under eval/. The hidden test runs every method as a procedure on in-memory hidden instances and validates the returned models (exact SAT equivalence; proper HMM/PC models; evaluator-fixed memory budgets). Any failure gets worst values. Audit of 20 cases: genuine improvement +0.69, reference 0, baseline -0.75, weaker variants -0.54 to -3.99; the blind answer-key scan, memory padding, direct score writes and replacing the public data all tie the reference; 8 cheating shortcuts fail validation. Residual: an informed attacker who reads the masked eval/test source scores +0.33 (documented in HARDENING.md). Paper method on test: SAT 41.3% memory reduction (equivalent); HMM @20% budget retention 75.2 vs baseline 64.0; PC @12% 96.9 vs 89.2. Hardware claims out of scope."
